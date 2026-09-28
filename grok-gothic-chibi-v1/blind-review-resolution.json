@@ -1,0 +1,7 @@
+{
+  "decision": "accept",
+  "severity": "minor",
+  "failed_checks": ["horizontal-1"],
+  "evidence": "All cardinal hard gates pass. Independent labeled normal-size review confirms 022.5 and 337.5 remain in the expected upper quadrants and the refreshed loop has no visible reversal, scale pop, clipping, or identity change.",
+  "reviewed_by": "parent"
+}

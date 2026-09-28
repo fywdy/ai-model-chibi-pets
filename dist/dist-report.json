@@ -1,0 +1,74 @@
+{
+ "chatgpt-white-dragon-chibi-v5": {
+  "native_sha16": "1024ad39f7cf1868",
+  "std9_sha16": "3ffc5aa777d0e139",
+  "std9_mb": 2.3,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "claude-orange-scholar-chibi-v3": {
+  "native_sha16": "a23bff54acf02354",
+  "std9_sha16": "53878701843ccc56",
+  "std9_mb": 1.68,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "deepseek-whale-maid-chibi-v4": {
+  "native_sha16": "2ddceaec9c6c3c89",
+  "std9_sha16": "f070a93d414fbe40",
+  "std9_mb": 2.36,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "gemini-star-cat-chibi-v1": {
+  "native_sha16": "81b3e471822e0bbf",
+  "std9_sha16": "296dd4365db3f44a",
+  "std9_mb": 2.27,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "grok-gothic-chibi-v1": {
+  "native_sha16": "3e28c2450468aa35",
+  "std9_sha16": "d6b63b458677d224",
+  "std9_mb": 2.41,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "kimi-moon-maid-chibi-v2": {
+  "native_sha16": "5c055572232bfc98",
+  "std9_sha16": "7e5b950c38c3d52c",
+  "std9_mb": 1.73,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "qwen-chibi-scholar-v3": {
+  "native_sha16": "a83e11f70ae77bb8",
+  "std9_sha16": "87b71d01156750cb",
+  "std9_mb": 2.4,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ },
+ "zhipu-chibi-tech-v2": {
+  "native_sha16": "ef9b95e5f2a80b21",
+  "std9_sha16": "f350accf40befd7e",
+  "std9_mb": 2.08,
+  "std9_green_px": 0,
+  "std9_size": "1536x1872",
+  "gif": 9,
+  "webp": 9
+ }
+}

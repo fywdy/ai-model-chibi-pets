@@ -1,0 +1,74 @@
+{
+ "thresholds": {
+  "max_green_blob_px": 20,
+  "green_residue_pixels": 200,
+  "fringe_green_pixels": 60
+ },
+ "results": {
+  "chatgpt-white-dragon-chibi-v5": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "claude-orange-scholar-chibi-v3": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "deepseek-whale-maid-chibi-v4": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "gemini-star-cat-chibi-v1": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "grok-gothic-chibi-v1": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "kimi-moon-maid-chibi-v2": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "qwen-chibi-scholar-v3": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  },
+  "zhipu-chibi-tech-v2": {
+   "green_residue_pixels": 0,
+   "max_green_blob_px": 0,
+   "fringe_green_pixels": 0,
+   "solid_non_green_cleared": 0,
+   "non_green_recolored": 0,
+   "ok": true
+  }
+ },
+ "passed": true
+}

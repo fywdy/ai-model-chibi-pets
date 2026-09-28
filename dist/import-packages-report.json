@@ -1,0 +1,82 @@
+{
+ "chatgpt-white-dragon-chibi-v5": {
+  "flat": "chatgpt-white-dragon-chibi-v5.zip",
+  "foldered": "chatgpt-white-dragon-chibi-v5-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 2.9
+ },
+ "claude-orange-scholar-chibi-v3": {
+  "flat": "claude-orange-scholar-chibi-v3.zip",
+  "foldered": "claude-orange-scholar-chibi-v3-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 1.91
+ },
+ "deepseek-whale-maid-chibi-v4": {
+  "flat": "deepseek-whale-maid-chibi-v4.zip",
+  "foldered": "deepseek-whale-maid-chibi-v4-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 2.89
+ },
+ "gemini-star-cat-chibi-v1": {
+  "flat": "gemini-star-cat-chibi-v1.zip",
+  "foldered": "gemini-star-cat-chibi-v1-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 2.86
+ },
+ "grok-gothic-chibi-v1": {
+  "flat": "grok-gothic-chibi-v1.zip",
+  "foldered": "grok-gothic-chibi-v1-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 2.95
+ },
+ "kimi-moon-maid-chibi-v2": {
+  "flat": "kimi-moon-maid-chibi-v2.zip",
+  "foldered": "kimi-moon-maid-chibi-v2-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 2.19
+ },
+ "qwen-chibi-scholar-v3": {
+  "flat": "qwen-chibi-scholar-v3.zip",
+  "foldered": "qwen-chibi-scholar-v3-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 3.04
+ },
+ "zhipu-chibi-tech-v2": {
+  "flat": "zhipu-chibi-tech-v2.zip",
+  "foldered": "zhipu-chibi-tech-v2-foldered.zip",
+  "entries": [
+   "pet.json",
+   "spritesheet.webp"
+  ],
+  "zip_ok": true,
+  "mb": 2.63
+ }
+}

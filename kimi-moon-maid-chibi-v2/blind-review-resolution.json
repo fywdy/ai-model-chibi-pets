@@ -1,0 +1,7 @@
+{
+  "decision": "accept",
+  "severity": "minor",
+  "failed_checks": ["horizontal-1", "horizontal-5"],
+  "evidence": "All cardinal hard gates pass. Independent labeled normal-size review confirms intended intermediate quadrants and a coherent clockwise loop with no visible reversal, scale pop, clipping, or identity change.",
+  "reviewed_by": "parent"
+}

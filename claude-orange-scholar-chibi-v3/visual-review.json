@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "verdict": "PASS",
+  "summary": "Independent final QA confirms one consistent two-head-tall orange scholar character and book prop across all 9 standard states and a coherent clockwise 16-direction loop. Cardinals are unmistakable; two intermediate vertical blind disagreements are accepted warnings.",
+  "issues": [
+    {"severity": "warning", "area": "intermediate-directions", "detail": "247.5 and 292.5 receive opposite vertical blind votes, while labeled review confirms down-left and up-left respectively without reversal."},
+    {"severity": "warning", "area": "continuity-metrics", "detail": "Reported local differences around 157.5→180, 292.5→315, and 337.5→000 are not visible as scale, baseline, identity, or prop-attachment failures."}
+  ]
+}

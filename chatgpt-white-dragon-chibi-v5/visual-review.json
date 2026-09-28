@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "verdict": "PASS",
+  "issues": [
+    {
+      "severity": "warning",
+      "area": "direction-continuity",
+      "detail": "Review warnings include alpha holes in 000/180 and several local transition outliers, especially 157.5 to 180; holes appear consistent with intentional tail-loop negative space, and no visual sequence reversal is evident.",
+      "repair": "Optional targeted continuity review; no repair required for acceptance."
+    },
+    {
+      "severity": "warning",
+      "area": "direction-blind-validation",
+      "detail": "Several diagonal samples receive opposite horizontal or vertical classifier labels, but all hard cardinal gates pass and the 16-direction visual progression remains coherent.",
+      "repair": "Keep as review-only warnings unless stricter diagonal classifier agreement is required."
+    }
+  ],
+  "summary": "PASS: atlas validation is clean; standard rows have correct frame counts with complete single-character sprites; identity, two-head-tall female white dragon design, gray horns, hair ornaments, and separate physical white tail remain stable. Animations are coherent, and 000/090/180/270 cardinals are correct with a continuous clockwise 16-direction sequence."
+}

@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "reviewed_by": "independent-final-qa",
+  "directions": [
+    {"degree":"000","expected":"up","observed":"centered face looking up","verdict":"pass","reason":"Horizontal axis stays centered; pupils and chin rise clearly."},
+    {"degree":"022.5","expected":"up-right","observed":"up-right with subtle horizontal cue","verdict":"warning","reason":"Labeled loop begins turning screen-right while eyes stay raised; blind horizontal vote disagrees."},
+    {"degree":"045","expected":"up-right","observed":"up-right","verdict":"pass","reason":"Nose and face move screen-right while gaze remains up."},
+    {"degree":"067.5","expected":"up-right","observed":"up-right","verdict":"pass","reason":"Right profile is strong and the eye line retains an upward component."},
+    {"degree":"090","expected":"right","observed":"right","verdict":"pass","reason":"Nose, pupils, and face point unmistakably screen-right; vertical axis is neutral."},
+    {"degree":"112.5","expected":"down-right","observed":"down-right","verdict":"pass","reason":"Face stays screen-right while eyelids and chin begin lowering."},
+    {"degree":"135","expected":"down-right","observed":"down-right","verdict":"pass","reason":"Right-facing profile and downward gaze are both clear."},
+    {"degree":"157.5","expected":"down-right","observed":"down-right","verdict":"pass","reason":"Pose nears centered down while retaining a small screen-right component."},
+    {"degree":"180","expected":"down","observed":"centered face looking down","verdict":"pass","reason":"Horizontal axis is centered; closed lowered eyes and tucked chin make down unmistakable."},
+    {"degree":"202.5","expected":"down-left","observed":"down-left","verdict":"pass","reason":"Face begins moving screen-left while eyelids remain lowered."},
+    {"degree":"225","expected":"down-left","observed":"down-left","verdict":"pass","reason":"Screen-left profile and low gaze are both readable."},
+    {"degree":"247.5","expected":"down-left","observed":"down-left","verdict":"pass","reason":"Left-facing profile remains strong and the head retains a downward tendency."},
+    {"degree":"270","expected":"left","observed":"left","verdict":"pass","reason":"Nose, pupils, and face point unmistakably screen-left; vertical axis is neutral."},
+    {"degree":"292.5","expected":"up-left","observed":"up-left","verdict":"pass","reason":"Face remains screen-left while pupils and chin begin rising."},
+    {"degree":"315","expected":"up-left","observed":"up-left","verdict":"pass","reason":"Left-facing profile and upward gaze are both clear."},
+    {"degree":"337.5","expected":"up-left","observed":"up-left with subtle horizontal cue","verdict":"warning","reason":"Labeled loop returns toward centered 000 while preserving upward gaze and slight left turn; blind horizontal vote disagrees."}
+  ]
+}

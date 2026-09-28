@@ -1,0 +1,7 @@
+{
+  "decision": "accept",
+  "severity": "minor",
+  "failed_checks": ["vertical-7"],
+  "evidence": "All cardinal hard gates pass. Independent labeled normal-size review confirms the affected intermediate poses remain in the intended left quadrants and the clockwise loop has no visible reversal or identity break.",
+  "reviewed_by": "parent"
+}

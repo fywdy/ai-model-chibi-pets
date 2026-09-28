@@ -1,0 +1,66 @@
+{
+ "chatgpt-white-dragon-chibi-v5": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "1024ad39f7cf1868"
+ },
+ "claude-orange-scholar-chibi-v3": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "a23bff54acf02354"
+ },
+ "deepseek-whale-maid-chibi-v4": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "2ddceaec9c6c3c89"
+ },
+ "gemini-star-cat-chibi-v1": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "81b3e471822e0bbf"
+ },
+ "grok-gothic-chibi-v1": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "3e28c2450468aa35"
+ },
+ "kimi-moon-maid-chibi-v2": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "5c055572232bfc98"
+ },
+ "qwen-chibi-scholar-v3": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "a83e11f70ae77bb8"
+ },
+ "zhipu-chibi-tech-v2": {
+  "green_px": 0,
+  "max_blob": 0,
+  "fringe": 0,
+  "previews_green": 0,
+  "ok": true,
+  "sha256_16": "ef9b95e5f2a80b21"
+ }
+}
