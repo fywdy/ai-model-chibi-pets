@@ -75,7 +75,7 @@ ${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/animation-rows.md       
    **declaring v2 while shipping an 1872-tall atlas mis-parses**.
 
 ⇒ That is why `dist/codex-standard-9row/` ships as the **v1 layout** for clients that only understand v1:
-its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files into Codex's v2 flow ✗.
+its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files into the ChatGPT app's v2 flow ✗.
 
 ### Row order (0-based)
 
@@ -178,7 +178,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 4. **Refresh**: open the **ChatGPT app** → **Settings → Pets → Refresh** — the new
    pets appear in your custom pet list; pick one to show it.
 5. Three gotchas ✓: ① the folder name must match `pet.json`'s `id` **exactly** ✓; ② both files must sit
-   **side by side** ✓; ③ do not install the `codex-standard-9row\` files into Codex ✗, and do not feed the
+   **side by side** ✓; ③ do not install the `codex-standard-9row\` files into the ChatGPT app ✗, and do not feed the
    `codex-native\` files to the v1-only ChatGPT pet slot ✗.
 
 > To redo an install: just delete `%USERPROFILE%\.codex\pets\<id>` ✓ (this directory only holds pet assets).
@@ -187,7 +187,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
 ```bash
 # run from the root of this repository
-bash dist/install-codex.sh native     # 11-row v2 master (1536×2288) — use this for Codex
+bash dist/install-codex.sh native     # 11-row v2 master (1536×2288) — use this for the ChatGPT app
 ```
 
 The script copies each pack's `pet.json` + `spritesheet.webp` into `~/.codex/pets/<id>/`,
@@ -198,8 +198,6 @@ Then open the **ChatGPT app → Settings → Pets → Refresh**; the eight pets 
 
 - Custom location: `CODEX_HOME=/your/path bash dist/install-codex.sh native`
 - Single pack only: copy `dist/codex-native/<id>/{pet.json,spritesheet.webp}` to `~/.codex/pets/<id>/`
-tools/
-  check-contract.py   verify-previews.py   chroma-verify.py   # repo quality gates (see §5)
 - **Uninstall / roll back**: delete `~/.codex/pets/<id>/`; to restore a backup, copy
   `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`
 
@@ -291,6 +289,8 @@ dist/
   import-packages/<id>.zip            # v2, flat layout
   import-packages/<id>-foldered.zip   # v2, foldered layout
   install-codex.sh  SPEC.md  dist-report.json  import-packages-report.json
+tools/
+  check-contract.py   verify-previews.py   chroma-verify.py   # repo quality gates (see §5)
 CHANGELOG-greenfix-2026-09-20.md   chroma-verify.json   greenfix-report.json
 docs/README-bundle-original.md
 NOTICE.md   LICENSE   LICENSE-MIT   RELEASE-REPORT-2026-09-27.md

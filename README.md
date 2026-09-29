@@ -165,7 +165,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 4. **刷新列表**：打开 **ChatGPT 应用** → **设置（Settings）→ Pets → 点 Refresh** ✓
    自定义宠物列表里就会出现新加的这几套 ✓ 选中即可显示 ✓
 5. 注意三点 ✓：① 文件夹名与 `pet.json` 里的 `id` **必须完全一致** ✓；② 两个文件**必须同层** ✓；
-   ③ 别把 `codex-standard-9row\` 那份装进 Codex ✗、也别把 `codex-native\` 那份喂给只认 v1 的 ChatGPT 宠物位 ✗
+   ③ 别把 `codex-standard-9row\` 那份装进 ChatGPT 应用 ✗、也别把 `codex-native\` 那份喂给只认 v1 的 ChatGPT 宠物位 ✗
 
 > 装错了想重来：直接删掉 `%USERPROFILE%\.codex\pets\<id>` 文件夹即可 ✓（此目录只放宠物素材 ✓）
 
@@ -173,7 +173,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
 ```bash
 # 在本仓库根目录执行
-bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——装进 Codex 用这个
+bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——装进 ChatGPT 应用 用这个
 ```
 
 脚本做三件事：把 8 套的 `pet.json` + `spritesheet.webp` 复制到 `~/.codex/pets/<id>/`；
@@ -189,7 +189,7 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
 ### ③ 只认 v1（1536×1872）的客户端（含 ChatGPT 网页版宠物位）
 
 用 `dist/codex-standard-9row/<id>/` 里那两份文件 ✓（其 `pet.json` **不带** `spriteVersionNumber` ✓ = v1 ✓）。
-**不要**把 11 行 v2 母版喂给它们 ✗，也不要把这份 9 行版装进 Codex ✗（见 §二的两条硬性规定）。
+**不要**把 11 行 v2 母版喂给它们 ✗，也不要把这份 9 行版装进 ChatGPT 应用 ✗（见 §二的两条硬性规定）。
 
 ### ④ 第三方桌宠客户端
 
@@ -265,7 +265,7 @@ CODEX_HOME=/tmp/cx_test bash dist/install-codex.sh native
   blind-review-resolution.json  # 仅上述三套有
   README.md
 dist/
-  codex-native/<id>/          # v2：pet.json + 11 行 1536×2288（装 Codex 用这个）
+  codex-native/<id>/          # v2：pet.json + 11 行 1536×2288（装进 ChatGPT 应用用这个）
   codex-standard-9row/<id>/   # v1：pet.json（不带 spriteVersionNumber）+ 9 行 1536×1872
   generic-assets/<id>/        # 接触表 + 预览
   import-packages/<id>.zip            # v2 根层版
