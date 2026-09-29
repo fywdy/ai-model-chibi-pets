@@ -3,17 +3,22 @@
 本 bundle 的 8 套宠物来自同一套母版图集，附带多种可直接使用的形态。
 所有图集均为**透明背景、逐像素无损 WebP**，已通过绿幕残留验证门（`chroma-verify.py`）。
 
+> **规格来源（v2 契约）**：本文件描述的规格以**随 Codex 分发**的 `hatch-pet` 技能内的
+> `references/codex-pet-contract.md`（*Codex V2 Pet Contract*）与 `references/animation-rows.md` 为准
+> （经 OpenAI 策展插件 `work-pets` 下发）。本地路径：
+> `${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/`。**若两者不一致，以本机该文件为准**。
+
 ## 1. 图集规格
 
 | 项 | 值 |
 |---|---|
 | 单格 | **192 × 208** px |
 | 列数 | **8**（每行 8 帧） |
-| 母版行数 | **11** = 官方标准 9 行 + 本套扩展 2 行（16 方向注视） |
-| 母版尺寸 | **1536 × 2288** |
-| 官方标准尺寸 | **1536 × 1872**（8 × 9，即母版前 9 行） |
+| 行数 | **11**（**v2 契约**：9 个标准状态行 + 2 个注视方向行 —— 两者都是 v2 的一部分） |
+| 尺寸 | **1536 × 2288**（8 列 × 11 行） |
+| v1 尺寸 | **1536 × 1872**（8 × 9）—— **只是中间装配产物**，供只认 v1 的客户端使用 |
 | 格式 | WebP，透明背景，`lossless=True, exact=True` |
-| 体积上限 | Codex 要求 ≤ 20 MiB（本套 1.9–3.0 MB，余量 85%+） |
+| 体积 | 1.9–3.0 MB／套（本项目自设 ≤ 20 MiB；契约文件未规定上限） |
 
 ### 行序（0 起）
 
@@ -28,10 +33,11 @@
 | 6 | `waiting` | 等待输入 |
 | 7 | `running` | 工作中 |
 | 8 | `review` | 审查 / 检查 |
-| 9 | `look-000~157.5` | **扩展**：注视方向（每帧 45°，8 帧） |
-| 10 | `look-180~337.5` | **扩展**：注视方向（每帧 45°，8 帧） |
+| 9 | `look-000~157.5` | 注视方向 A（8 帧，每帧 **22.5°**） |
+| 10 | `look-180~337.5` | 注视方向 B（8 帧，每帧 **22.5°**） |
 
-> 行 9–10 是本套自扩展，不在官方标准内。只按前 9 行取帧的客户端不受影响。
+> 行 9–10 **属于 v2 契约本身**（16 个顺时针注视方向）；`000°` 指**正上方**（12 点），**不是正面** ——
+> 正面是无向量死区，回落到 `idle`。每行用到的列与帧时长见 `animation-rows.md`。
 
 ## 2. `pet.json` 字段
 
@@ -46,15 +52,15 @@
 ```
 
 - `id`：小写 + 连字符 slug，须与安装目录名一致
-- `spriteVersionNumber`：固定 `2`
-- `spritesheetPath`：包内相对路径
+- `spriteVersionNumber`：**v2 写 `2`；v1 必须省略该字段**（缺省即 v1）。**错配会被拒或帧错位** ✗
+- `spritesheetPath`：包内相对路径（与 `pet.json` 同层）
 
 ## 3. 产物目录
 
 | 目录 | 内容 | 用途 |
 |---|---|---|
-| `codex-native/<套>/` | `pet.json` + **11 行** 1536×2288 | Codex 桌面版 / CLI |
-| `codex-standard-9row/<套>/` | `pet.json` + **8×9** 1536×1872 | 官方规格、ChatGPT 网页版、第三方图库投稿 |
+| `codex-native/<套>/` | `pet.json`（**v2**，`spriteVersionNumber: 2`）+ **11 行** 1536×2288 | Codex 桌面版 / CLI |
+| `codex-standard-9row/<套>/` | `pet.json`（**v1**，**省略** `spriteVersionNumber`）+ **8×9** 1536×1872 | 只认 v1 的客户端（ChatGPT 网页版等）；**不要装进 Codex** ✗ |
 | `generic-assets/<套>/` | `pet.json` + `contact-sheet.png` + `previews/*.gif` + `previews/*.webp` | 任何能读图片的客户端 / 播放器 |
 | `import-packages/<套>.zip` | `pet.json` + `spritesheet.webp`（根层） | 第三方桌宠客户端「导入宠物包」 |
 | `import-packages/<套>-foldered.zip` | 同上，但在 `<套>/` 子目录内 | 要求 zip 内带文件夹的导入器 |
@@ -101,6 +107,9 @@ $PY tools/chroma-verify.py <原bundle> <修复后bundle>     # 退出码 0/1，�
 
 ## 6. 版权与署名
 
-8 套角色为**非官方同人创作**，与 OpenAI / Anthropic / Google / xAI / DeepSeek /
-Moonshot / 阿里 / 智谱**无任何关联**，未获其授权或背书；角色设定中的品牌联想仅作
-识别用途。公开发布前请确认命名与许可策略（建议去掉品牌前缀或明确标注非商用）。
+8 套角色为**面向各家 AI 品牌的社区同人形象创作**（非官方同人），与 OpenAI / Anthropic / Google / xAI /
+DeepSeek / Moonshot / 阿里 / 智谱**无任何关联**，未获授权、赞助或背书，也**不代表其官方形象或立场**；
+角色名中的品牌词仅作**识别用途**。
+
+本仓库采取的策略：**保留品牌前缀** + `NOTICE.md`（非官方 / 无关联 / 商标归各自所有者 / 下架承诺）
++ 美术 **CC BY-NC 4.0**（非商用）+ 脚本 **MIT**。若权利人认为不妥，在 Issues 提出即下架。
