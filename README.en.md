@@ -141,6 +141,8 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 > The link goes through the `gh-proxy.com` mirror ✓ (direct GitHub from mainland China is often only tens of
 > KB/s ✗; the mirror measured up to ~2 MB/s ✓). On a flaky connection, **just run the same line again** ✓ —
 > `-C -` resumes from where it stopped instead of re-downloading ✓. Drop the `https://gh-proxy.com/` prefix
+> If a local proxy (SSR / Shadowrocket / Clash …) makes the mirror slower, add `--noproxy '*'` to
+> **bypass the system proxy** ✓ (measured here: 104 KB/s bypassed vs 87 KB/s through the proxy — try both).
 > to use the official source.
 
 - Uses only what macOS **ships with** — `curl` / `tar` / `bash`. **Nothing to install, no Python needed** ✗

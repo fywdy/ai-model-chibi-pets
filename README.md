@@ -131,6 +131,8 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
 > 链接用了 `gh-proxy.com` 镜像 ✓（国内直连 GitHub 常只有几十 KB/s ✗，本机实测镜像可达 ~2 MB/s ✓）。
 > 网络不好时**再执行同一行即可续传** ✓（`-C -` 会接着上次的字节继续 ✓ 不会重下 ✓）。
+> 若本机开着代理（SSR / Shadowrocket / Clash 等）反而更慢，加 `--noproxy '*'` **绕开系统代理**再走镜像 ✓
+> （本机实测：绕开 104 KB/s ↔ 走代理 87 KB/s，视线路而定 ✓ 两种都可直接粘贴 ✓）。
 > 想走官方源就删掉 `https://gh-proxy.com/` 前缀 ✓。
 
 - 只用 **macOS 自带**的 `curl` / `tar` / `bash` ✓ —— **不用装任何东西，也不需要 Python** ✗
