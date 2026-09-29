@@ -25,7 +25,9 @@ Moonshot AI（Kimi）· 阿里巴巴（Qwen）· 智谱 AI（Zhipu / GLM）
 
 角色图集由生成式图像工具产出后**逐格人工筛选、拼接与修复**（含绿幕残留清理，硬门与逐套数字见
 `chroma-verify.json`、`greenfix-report.json` 与 `CHANGELOG-greenfix-2026-09-20.md`）。
-仓库内的校验记录（`validation.json` / `visual-review.json`）为当时流程的原始留档。
+仓库内的校验记录中，`visual-review.json` 为当时流程的原始留档 ✓；
+`validation.json` 已于 **2026-09-29** 由官方 `validate_atlas.py --require-v2` 重新生成 ✓
+（旧版本含 `green_*` 等字段，现为官方摘要 ✓；`file` 字段为仓库内相对路径 ✓）。
 
 ## 5. 下架与联系
 

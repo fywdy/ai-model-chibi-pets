@@ -54,7 +54,7 @@ $PY tools/chroma-verify.py \
 ```
 
 阈值：偏绿 ≤200 px、最大绿块 ≤20 px、边缘绿 ≤60 px、实心非绿被清 = 0、非绿改色 = 0。
-退出码 0 = 通过（可直接接 CI）。工具说明见 `tools/README-chroma.md`。
+退出码 0 = 通过（可直接接 CI）。工具说明见 `dist/SPEC.md` 第 5 节 ✓。
 
 ## 遗留 / 下一步
 
@@ -70,7 +70,9 @@ $PY tools/chroma-verify.py \
   已把透明像素 RGB 置 0 ✓（可见像素逐位不变 ✓）。另**纠正一处自我误判** ✗：
   `idle` 行 `列6` 是官方 `EXTENDED_NEUTRAL_LOOK_FRAME`（v2 必须保留 ✗，v1 才是未用格 → 9row 清空 ✓）——
   曾被误当作未用格清掉，已回滚 ✓。**官方校验器 24/24 通过 ✓**
-- **validation.json**：改用官方校验器重新生成（旧文件里的 `transparent_rgb_residue_pixels: 0` 与实测矛盾 ✗）
+- **validation.json**：改用官方校验器重新生成（旧文件里的 `transparent_rgb_residue_pixels: 0` 与实测矛盾 ✗）。
+  注：以上 `green_*` / `fringe_*` 字段名属于**旧版** `validation.json`；2026-09-29 起该文件为官方
+  `validate_atlas.py` 摘要（`ok` / 尺寸 / 行列 / `transparent_rgb_residue_pixels`），不再含 `green_*` ✓
 - **预览**：144 个 GIF/WebP 按契约**逐帧时长**重生成（原来 9 状态是均一 duration ✗）；
   16 张接触表按原版式重做 ✓
 - **派生**：16 个 zip 重建（结构/权限保持、内容与图集逐字节一致 ✓）；4 份报告用原判据重算 ✓

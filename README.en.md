@@ -121,7 +121,7 @@ its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files 
 | Columns × rows | **8 × 11** = 1536 × 2288 (v2 master, main artifact) |
 | Other layout | **8 × 9** = 1536 × 1872 (**v1**, for v1-only clients — see §2) |
 | Format | WebP, **transparent**, `lossless=True, exact=True` (pixel-lossless) |
-| Size | 1.68 – 3.04 MiB per pack (self-imposed 20 MiB limit, 85%+ headroom) |
+| Size | 1.68 – 3.01 MiB per pack (self-imposed 20 MiB limit, 84.9%+ headroom) |
 
 ## 4. Installation guide
 
@@ -144,7 +144,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
 - Uses only what macOS **ships with** — `curl` / `tar` / `bash`. **Nothing to install, no Python needed** ✗
   (validation uses the built-in `plutil`; atlas dimensions are parsed by the script itself).
-- Installs into `~/.codex/pets/` with an **automatic backup before overwriting**; then restart Codex →
+- Installs into `~/.codex/pets/` with an **automatic backup before overwriting**; then restart the ChatGPT app →
   **Settings → Pets → Refresh**.
 - Roll back by copying `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`.
 - Dry run first: append `--help` instead of `native`, or prefix `CODEX_HOME=/tmp/cx_test` to install into a
@@ -160,8 +160,8 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
    | Target | Which directory | Atlas |
    |---|---|---|
-   | **ChatGPT app** (the Codex desktop app has been merged into it) | `dist\codex-native\` | v2, 8×11, 1536×2288 ✓ |
-   | **ChatGPT app / web pet slot** | `dist\codex-standard-9row\` | v1, 8×9, 1536×1872 ✓ (that slot only accepts this size) |
+   | **ChatGPT desktop app** (the Codex desktop app has been merged into it) | `dist\codex-native\` | v2, 8×11, 1536×2288 ✓ |
+   | **ChatGPT web pet slot** | `dist\codex-standard-9row\` | v1, 8×9, 1536×1872 ✓ (that slot only accepts this size) |
 
 3. **Copy the whole pack folder(s)** into the pets directory — paste this into the Explorer address bar:
    ```
@@ -200,13 +200,13 @@ Then open the **ChatGPT app → Settings → Pets → Refresh**; the eight pets 
 - **Uninstall / roll back**: delete `~/.codex/pets/<id>/`; to restore a backup, copy
   `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`
 
-### ③ Clients that only understand v1 (1536×1872) — incl. the ChatGPT app / web pet slot
+### ③ Clients that only understand v1 (1536×1872) — incl. the ChatGPT web pet slot
 
 Use the two files inside `dist/codex-standard-9row/<id>/` ✓ (its `pet.json` **omits** `spriteVersionNumber`,
 i.e. v1 ✓). Do **not** feed the 11-row v2 master to those clients ✗, and do not install the 9-row variant
-into Codex ✗ (see the two hard rules in §2).
+into the ChatGPT desktop app ✗ (see the two hard rules in §2).
 
-### ③ Third-party desktop pet clients
+### ④ Third-party desktop pet clients
 
 Importers disagree about the zip's internal layout, so **both variants ship** (containing the **v2 / 11-row** pack ✓):
 
@@ -228,7 +228,7 @@ Use `dist/generic-assets/<id>/`: a contact sheet plus `previews/` (one GIF and o
 ### ⑤ Troubleshooting
 
 - **Pet not listed** → check the folder name equals `pet.json`'s `id` **exactly**, and that
-  `spritesheet.webp` sits **next to** `pet.json`, then restart Codex / hit Refresh ✓.
+  `spritesheet.webp` sits **next to** `pet.json`, then restart the ChatGPT app / hit Refresh ✓.
 - **Dimension or frame mis-parse errors** → almost always a **v1 layout paired with a v2 declaration**
   (or vice versa) ✗ — match the correct pair from §2 ✓.
 - **Green fringe around the character** → this pack set passes the hard green-screen gate (0 residue) ✓;

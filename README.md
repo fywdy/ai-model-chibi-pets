@@ -113,11 +113,12 @@ ${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/animation-rows.md       
 | 列 × 行 | **8 × 11** = 1536 × 2288（v2 主产物，母版） |
 | 另一版式 | **8 × 9** = 1536 × 1872（**v1**，给只认 v1 的客户端；见 §二） |
 | 格式 | WebP，**透明背景**，`lossless=True, exact=True`（逐像素无损） |
-| 体积 | 1.68 – 3.04 MiB／套（本项目自设上限 20 MiB，余量 85%+） |
+| 体积 | 1.68 – 3.01 MiB／套（本项目自设上限 20 MiB，余量 84.9%+） |
 
 ## 四、安装引导
 
-> **关于客户端**：原 **Codex 桌面应用**已被 **ChatGPT 应用**取代（2026-09 实测确认）✓。
+> **关于客户端**：原 **Codex 桌面应用**已被 **ChatGPT 应用**取代（2026-09 **单机实测**所得 ✓；
+> 仓库内无自证材料，未获独立验证 ✗）。
 > 自定义宠物目录仍是 `~/.codex/pets/<id>/` ✓ —— 由 ChatGPT 应用读取 ✓（该目录规则来自应用随包下发的
 > `hatch-pet` 技能契约 `${CODEX_HOME:-$HOME/.codex}/pets/<pet-name>/` ✓）。本仓库的安装说明据此只针对
 > **ChatGPT 应用** ✓。
@@ -134,7 +135,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
 - 只用 **macOS 自带**的 `curl` / `tar` / `bash` ✓ —— **不用装任何东西，也不需要 Python** ✗
   （脚本的校验走系统自带 `plutil` ✓，图集尺寸由脚本内部解析 ✓）
-- 装到 `~/.codex/pets/` ✓，**覆盖前自动备份** ✓；装完按提示重启 Codex → **设置 → Pets → Refresh** ✓
+- 装到 `~/.codex/pets/` ✓，**覆盖前自动备份** ✓；装完按提示重启 ChatGPT 应用 → **设置 → Pets → Refresh** ✓
 - 回滚：把 `~/.codex/pets_backup-<时间戳>/<id>/` 拷回 `~/.codex/pets/` ✓
 - 想先空跑：在命令末尾把 `native` 换成 `--help` 看用法，或先加 `CODEX_HOME=/tmp/cx_test` 试装到临时目录 ✓
 - 已 clone 过仓库的话，等价命令是：`bash dist/install-codex.sh native` ✓
@@ -147,8 +148,8 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
    | 装到哪 | 用哪个目录 | 图集 |
    |---|---|---|
-   | **ChatGPT 应用**（原 Codex 桌面端已并入） | `dist\codex-native\` | v2，8×11，1536×2288 ✓ |
-   | **ChatGPT 应用 / 网页版的宠物位** | `dist\codex-standard-9row\` | v1，8×9，1536×1872 ✓（该宠物位只认这一种尺寸） |
+   | **ChatGPT 桌面应用**（原 Codex 桌面端已并入） | `dist\codex-native\` | v2，8×11，1536×2288 ✓ |
+   | **ChatGPT 网页版宠物位** | `dist\codex-standard-9row\` | v1，8×9，1536×1872 ✓（该宠物位只认这一种尺寸） |
 
 3. **复制整套文件夹**到宠物目录 —— 在资源管理器地址栏粘贴：
    ```
@@ -185,12 +186,12 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
 - **卸载 / 回滚**：删掉 `~/.codex/pets/<id>/`；想回到覆盖前的版本，把
   `~/.codex/pets_backup-<时间戳>/<id>/` 拷回 `~/.codex/pets/`
 
-### ③ 只认 v1（1536×1872）的客户端（含 ChatGPT 应用 / 网页版宠物位）
+### ③ 只认 v1（1536×1872）的客户端（含 ChatGPT 网页版宠物位）
 
 用 `dist/codex-standard-9row/<id>/` 里那两份文件 ✓（其 `pet.json` **不带** `spriteVersionNumber` ✓ = v1 ✓）。
 **不要**把 11 行 v2 母版喂给它们 ✗，也不要把这份 9 行版装进 Codex ✗（见 §二的两条硬性规定）。
 
-### ③ 第三方桌宠客户端
+### ④ 第三方桌宠客户端
 
 不同客户端对 zip 内的层级要求不一致，所以**两种都产出了**（zip 内是 **v2 / 11 行** 版 ✓）：
 
@@ -211,7 +212,7 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
 ### ⑤ 常见问题
 
 - **列表里看不到宠物** ⇒ 目录名与 `pet.json` 的 `id` 是否**完全一致**、`spritesheet.webp` 是否与 `pet.json` **同层**，
-  然后重启 Codex / 重新 Refresh ✓。
+  然后重启 ChatGPT 应用 / 重新 Refresh ✓。
 - **图集尺寸/帧错位报错** ⇒ 大概率是 **v1 版式配了 v2 声明**（或反之）✗ —— 对照 §二 的表换用正确的组合 ✓。
 - **角色边缘有绿边** ⇒ 本套已过绿幕硬门（残留 0）✓；你看到绿边多半是客户端把透明区按**黑底**合成所致 ✓，
   换支持 alpha 的客户端，或直接看 `previews/*.webp` ✓。
@@ -222,7 +223,7 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
 `dist/install-codex.sh` 是**纯本地脚本：不联网、不用 sudo、不删除任何文件** ✓，只做「只读预检 → 备份 → 复制」：
 
 1. **只读预检**（任一套不合规 ⇒ **整体中止，不改动任何文件** ✗）：逐套检查
-   `spritesheet.webp` 存在且为 WebP（RIFF/WEBP 魔数 ✓）、体积在 100 KB–20 MiB 之间 ✓、
+   `spritesheet.webp` 存在且为 WebP（RIFF/WEBP 魔数 ✓）、体积在 100000 字节（≈97.7 KiB）–20 MiB 之间 ✓、
    `pet.json` 的 `id` 与目录名一致 ✓、包内版本声明与所选变体一致 ✓、
    以及**要覆盖的已装版本若版式不同则默认拒绝** ✗（防 v1/v2 交错覆盖；确认要换版式加 `--force` ✓）。
 2. **备份**：只把将被覆盖的同名目录整体备份到 `${CODEX_HOME}/pets_backup-<时间戳>/` ✓。
@@ -256,10 +257,12 @@ CODEX_HOME=/tmp/cx_test bash dist/install-codex.sh native
   pet.json                    # v2：id / displayName / description / spriteVersionNumber:2 / spritesheetPath
   spritesheet.webp            # 8×11 = 1536×2288，透明
   dialogue.zh-CN.json         # 中文人格台词
-  validation.json             # 逐格校验（含绿幕残留字段）
+  validation.json             # 官方校验器摘要（ok / 尺寸 / 行列 / 透明像素 RGB 残留；不含逐格数组）
   visual-review.json          # 视觉复核记录
   contact-sheet.png           # 768×1386 接触表
   qa/previews/*.gif|*.webp    # 9 个状态预览（README 图例即取自此）
+  direction-semantics.json    # 仅 claude / grok / kimi 三套有
+  blind-review-resolution.json  # 仅上述三套有
   README.md
 dist/
   codex-native/<id>/          # v2：pet.json + 11 行 1536×2288（装 Codex 用这个）
@@ -268,6 +271,8 @@ dist/
   import-packages/<id>.zip            # v2 根层版
   import-packages/<id>-foldered.zip   # v2 文件夹版
   install-codex.sh  SPEC.md  dist-report.json  import-packages-report.json
+tools/
+  check-contract.py   verify-previews.py   chroma-verify.py   # 仓库自带质量门（用法见 §五）
 CHANGELOG-greenfix-2026-09-20.md   chroma-verify.json   greenfix-report.json
 docs/README-bundle-original.md
 NOTICE.md   LICENSE   LICENSE-MIT   RELEASE-REPORT-2026-09-27.md

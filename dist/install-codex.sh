@@ -32,7 +32,6 @@ usage() {
 
 环境变量: CODEX_HOME（默认 $HOME/.codex）
 USAGE
-  exit 0
 }
 
 # ---------- ① 参数解析（拒绝未知选项、重复变体、多余目录参数） ----------
@@ -47,7 +46,7 @@ while [ $# -gt 0 ]; do
     BUNDLE="${arg}"; continue
   fi
   case "${arg}" in
-    -h|--help) usage ;;
+    -h|--help) usage; exit 0 ;;
     --force)   FORCE=1 ;;
     --)        SEEN_DASHDASH=1 ;;
     native|9row)
@@ -325,6 +324,6 @@ for id in ${ids}; do
   digest="$(hash16 "${PETS}/${id}/spritesheet.webp" 2>/dev/null || echo '(取哈希失败)')"
   printf "    %s  %s\n" "${digest}" "${id}/spritesheet.webp"
 done
-echo "  下一步: 重启 Codex 桌面版 → 设置 → Pets → Refresh 后选择宠物"
+echo "  下一步: 重启 ChatGPT 应用（原 Codex 桌面端已并入）→ 设置 → Pets → Refresh 后选择宠物"
 [ "${failed}" != "0" ] && exit 1
 exit 0
