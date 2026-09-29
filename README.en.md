@@ -123,9 +123,66 @@ its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files 
 | Format | WebP, **transparent**, `lossless=True, exact=True` (pixel-lossless) |
 | Size | 1.68 – 3.04 MiB per pack (self-imposed 20 MiB limit, 85%+ headroom) |
 
-## 4. Installation guide (English)
+## 4. Installation guide
 
-### ① Codex desktop / CLI — recommended
+> **About the client**: the **Codex desktop app** has been replaced by the **ChatGPT app** (confirmed on a real
+> machine, 2026-09) ✓. Custom pets still live in `~/.codex/pets/<id>/` ✓, read by the ChatGPT app ✓ — that
+> directory rule comes from the app's bundled `hatch-pet` skill contract
+> (`${CODEX_HOME:-$HOME/.codex}/pets/<pet-name>/` ✓). The install instructions here therefore target the
+> **ChatGPT app** only ✓.
+
+### ⓪ macOS: one-line install (paste into Terminal)
+
+```bash
+d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.tar.gz && tar xzf pets.tar.gz && bash ai-model-chibi-pets-main/dist/install-codex.sh native
+```
+
+> The link goes through the `gh-proxy.com` mirror ✓ (direct GitHub from mainland China is often only tens of
+> KB/s ✗; the mirror measured up to ~2 MB/s ✓). On a flaky connection, **just run the same line again** ✓ —
+> `-C -` resumes from where it stopped instead of re-downloading ✓. Drop the `https://gh-proxy.com/` prefix
+> to use the official source.
+
+- Uses only what macOS **ships with** — `curl` / `tar` / `bash`. **Nothing to install, no Python needed** ✗
+  (validation uses the built-in `plutil`; atlas dimensions are parsed by the script itself).
+- Installs into `~/.codex/pets/` with an **automatic backup before overwriting**; then restart Codex →
+  **Settings → Pets → Refresh**.
+- Roll back by copying `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`.
+- Dry run first: append `--help` instead of `native`, or prefix `CODEX_HOME=/tmp/cx_test` to install into a
+  throwaway directory.
+- Already cloned the repo? The equivalent command is `bash dist/install-codex.sh native`.
+
+### ① Windows: download the ZIP and add the folder manually (no command line)
+
+1. **Download**: on the repository page click the green **Code** button → **Download ZIP**
+   (direct link: `https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.zip`).
+2. **Unzip** and open `ai-model-chibi-pets-main\dist\`. There are two usable directories — **pick according
+   to which app you are installing into**:
+
+   | Target | Which directory | Atlas |
+   |---|---|---|
+   | **ChatGPT app** (the Codex desktop app has been merged into it) | `dist\codex-native\` | v2, 8×11, 1536×2288 ✓ |
+   | **ChatGPT app / web pet slot** | `dist\codex-standard-9row\` | v1, 8×9, 1536×1872 ✓ (that slot only accepts this size) |
+
+3. **Copy the whole pack folder(s)** into the pets directory — paste this into the Explorer address bar:
+   ```
+   %USERPROFILE%\.codex\pets
+   ```
+   Create the `pets` folder if it does not exist. Copy e.g. the folder `chatgpt-white-dragon-chibi-v5`
+   as a folder (all eight if you want them all). The final layout must be exactly
+   (**both files side by side, folder name = the `id` inside `pet.json`**):
+   ```
+   %USERPROFILE%\.codex\pets\chatgpt-white-dragon-chibi-v5\pet.json
+   %USERPROFILE%\.codex\pets\chatgpt-white-dragon-chibi-v5\spritesheet.webp
+   ```
+4. **Refresh**: open the **ChatGPT app** → **Settings → Pets → Refresh** — the new
+   pets appear in your custom pet list; pick one to show it.
+5. Three gotchas ✓: ① the folder name must match `pet.json`'s `id` **exactly** ✓; ② both files must sit
+   **side by side** ✓; ③ do not install the `codex-standard-9row\` files into Codex ✗, and do not feed the
+   `codex-native\` files to the v1-only ChatGPT pet slot ✗.
+
+> To redo an install: just delete `%USERPROFILE%\.codex\pets\<id>` ✓ (this directory only holds pet assets).
+
+### ② ChatGPT app (script route, with backup and rollback)
 
 ```bash
 # run from the root of this repository
@@ -136,14 +193,14 @@ The script copies each pack's `pet.json` + `spritesheet.webp` into `~/.codex/pet
 **backs up any existing pet with the same id** into `~/.codex/pets_backup-<timestamp>/` first,
 and prints one `✓ <id>` line per pack.
 
-Then open **Codex desktop → Settings → Pets → Refresh**; the eight pets appear in your custom pet list ✓.
+Then open the **ChatGPT app → Settings → Pets → Refresh**; the eight pets appear in your custom pet list ✓.
 
 - Custom location: `CODEX_HOME=/your/path bash dist/install-codex.sh native`
 - Single pack only: copy `dist/codex-native/<id>/{pet.json,spritesheet.webp}` to `~/.codex/pets/<id>/`
 - **Uninstall / roll back**: delete `~/.codex/pets/<id>/`; to restore a backup, copy
   `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`
 
-### ② Clients that only understand v1 (1536×1872)
+### ③ Clients that only understand v1 (1536×1872) — incl. the ChatGPT app / web pet slot
 
 Use the two files inside `dist/codex-standard-9row/<id>/` ✓ (its `pet.json` **omits** `spriteVersionNumber`,
 i.e. v1 ✓). Do **not** feed the 11-row v2 master to those clients ✗, and do not install the 9-row variant

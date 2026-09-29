@@ -73,3 +73,60 @@ python3 tools/chroma-verify.py <原bundle> <发布集>
 
 工具版本：Python 3.9.6（macOS 自带）+ Pillow 11.3.0（隔离 venv）。
 本报告的数字全部来自上述命令的**实际输出**，未手抄、未推算。
+
+## 6. 第二轮修正记录（2026-09-29）
+
+本轮修正的是**契约合规**（非安全问题）。所有改动均可用仓库自带脚本复现验证 ✓。
+
+### 6.1 图集：真正的合规问题与一次自我纠正
+
+读者须知：本节曾先按 `animation-rows.md` 的**文字条款**下过结论，后被官方校验器推翻，故保留全过程 ✓。
+
+| 阶段 | 事实 | 结论 |
+|---|---|---|
+| 误判 ✗ | 把 `idle` 的列 6 当成「未用格」（文字条款只说"未用格必须透明"，未提该格特殊），据此清空了 24 张图集的该格 | **错误** ✗ —— 官方 `validate_atlas.py` 报 `idle row 0 column 6 is empty or too sparse` |
+| 自我纠正 ✓ | 读官方校验器源码：`0: ("idle", 6)` 与 **`EXTENDED_NEUTRAL_LOOK_FRAME = (0, 6)`** ⇒ 该格是**被使用**的「扩展中性注视帧」；24 张图集随即 `git checkout` **回滚** ✓ | **必须以官方校验器为准，不能只读文字条款** ✓ |
+| 真问题 ✓ | 官方校验器在**回滚后的原版**上仍报 `atlas has N fully transparent pixels with non-zero RGB residue`（各套 298–6400 px ✗） | 这才是真正需要修的合规项 ✓ |
+| 正确修正 ✓ | ① v2（11 行）保留 `(0,6)` 原样 ✗；② v1（9 行 9row）清空 `(0,6)`（该版本下它是未用格 ✓）；③ **完全透明像素的 RGB 置 0** ✓（可见像素逐位不变 ✓） | **官方校验器 24/24 通过 ✓、残留全 0 ✓** |
+| 关键认知 ✓ | **v1 与 v2 对 `(0,6)` 的要求完全相反**：v2 必须有内容、v1 必须全透明 ✗ | 不区分版本的"统一修正"两个方向都会错 ✗ |
+| 附带 ✓ | 旧 `validation.json` 写着 `transparent_rgb_residue_pixels: 0` ✗，与官方实测（298–6400 ✗）矛盾 | 已用官方校验器重新生成 ✓（并删除其输出中的绝对路径 ✗） |
+
+### 6.2 预览：按契约逐帧时长重生成
+
+修正前 9 个状态的 GIF/WebP 预览时长是**均一值**（生成脚本误抄了旧 GIF 的单一 `duration` ✗）。
+现已按契约重生成 **144 个预览**（8 套 × 9 状态 × GIF/WebP），逐帧时长与契约逐项一致 ✓
+（例：`idle` = 280, 110, 110, 140, 140, 320 ms）；接触表 16 张按原版式（8×11、96×126、底色 232）重做 ✓。
+
+### 6.3 派生包与报告
+
+| 项 | 处理 | 验证 |
+|---|---|---|
+| `import-packages/*.zip`（16 个） | 重建（保持条目名/顺序/权限，仅换图集字节） | CRC ✓ 权限 `100644` ✓ 无绝对路径/`..` ✓ 内容与修正后图集逐字节一致 ✓ |
+| `greenfix-report.json` / `chroma-verify.json` / `dist/dist-report.json` / `import-packages-report.json` | 用原判据重算（含新的 `sha256_16`） | 绿幕指标全 0 ✓ |
+| `validation.json`（8 个） | **改用官方 `validate_atlas.py --require-v2` 重新生成** ✓（`file` 字段改写为仓库内相对路径 ✗ 避免泄漏本机绝对路径） | 8/8 `ok: true`、`transparent_rgb_residue_pixels: 0` ✓ |
+
+### 6.4 新增：仓库自带质量门
+
+```bash
+python3 tools/check-contract.py .     # 未用格全透明（区分 v1/v2 的 (0,6) 规则）+ 透明像素 RGB 残留 → 24 张、0 问题 ✓
+python3 tools/verify-previews.py .    # 9 状态帧数与逐帧时长                                        → 16 个目录、0 问题 ✓
+python3 tools/chroma-verify.py dist   # 绿幕阈值                                                    → 8 张全 0 ✓
+```
+
+三者均只用 **Python 3 + Pillow**（无需 numpy），失败以非 0 退出码结束，可接 CI ✓。
+附带：官方校验器 `validate_atlas.py`（Codex `hatch-pet` 技能内）对本仓库图集的结论为 **24/24 通过 ✓**。
+
+### 6.5 安装脚本与文档
+
+- `dist/install-codex.sh` 重写为 **macOS 优先**：兼容系统自带 **Bash 3.2**（修掉 `$13` 两位数位置参数、
+  中文紧邻变量等**只在 3.2 上出现**的坑 ✗）、**零下载、零网络、零 sudo、零 Python**
+  （JSON 校验走自带 `plutil`，图集尺寸由脚本内部按 RIFF/WEBP 头解析）；写入前先只读预检 +
+  自动备份 + 拒绝符号链接目标 + 同名备份去重 + 严格参数校验 ✓
+- `README.md` / `README.en.md`：新增 **macOS 一行命令**（走 `gh-proxy` 镜像、`curl -C -` 可续传重跑）+
+  **Windows「下载 zip 后手动添加」指南**（按客户端选 `codex-native` 或 `codex-standard-9row`）✓
+- 客户端表述统一为 **ChatGPT 应用**（原 Codex 桌面端已并入 ✓；宠物目录仍为 `~/.codex/pets/<id>/` ✓，
+  该规则来自应用随包下发的 `hatch-pet` 技能契约 ✓）
+- `dist/SPEC.md`：补「每行用到的列 / 帧时长 / 未用格」硬要求表 + 本轮修正记录 ✓
+
+> 未做的事：未改动 Mac 上原始工程与 `release-public-2026-09-27/` 快照 ✗；未重写 Git 历史 ✗；
+> 未引入任何新的素材来源 ✗（全部由既有图集无损派生 ✓）。

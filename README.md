@@ -1,4 +1,4 @@
-# AI 模型娘 · Codex 桌面宠物包（Q 版 v5）
+# AI 模型娘 · 桌面宠物包（Q 版 v5 · 适配 ChatGPT 应用）
 
 > ## 🎨 这是什么
 > **面向各家 AI 品牌的「社区同人形象创作」** —— 由社区作者以各品牌的公开形象、配色与调性为灵感，
@@ -115,9 +115,60 @@ ${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/animation-rows.md       
 | 格式 | WebP，**透明背景**，`lossless=True, exact=True`（逐像素无损） |
 | 体积 | 1.68 – 3.04 MiB／套（本项目自设上限 20 MiB，余量 85%+） |
 
-## 四、安装引导（中文）
+## 四、安装引导
 
-### ① Codex 桌面版 / CLI —— 推荐
+> **关于客户端**：原 **Codex 桌面应用**已被 **ChatGPT 应用**取代（2026-09 实测确认）✓。
+> 自定义宠物目录仍是 `~/.codex/pets/<id>/` ✓ —— 由 ChatGPT 应用读取 ✓（该目录规则来自应用随包下发的
+> `hatch-pet` 技能契约 `${CODEX_HOME:-$HOME/.codex}/pets/<pet-name>/` ✓）。本仓库的安装说明据此只针对
+> **ChatGPT 应用** ✓。
+
+### ⓪ macOS：一行命令装好（复制粘贴到「终端」即可）
+
+```bash
+d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.tar.gz && tar xzf pets.tar.gz && bash ai-model-chibi-pets-main/dist/install-codex.sh native
+```
+
+> 链接用了 `gh-proxy.com` 镜像 ✓（国内直连 GitHub 常只有几十 KB/s ✗，本机实测镜像可达 ~2 MB/s ✓）。
+> 网络不好时**再执行同一行即可续传** ✓（`-C -` 会接着上次的字节继续 ✓ 不会重下 ✓）。
+> 想走官方源就删掉 `https://gh-proxy.com/` 前缀 ✓。
+
+- 只用 **macOS 自带**的 `curl` / `tar` / `bash` ✓ —— **不用装任何东西，也不需要 Python** ✗
+  （脚本的校验走系统自带 `plutil` ✓，图集尺寸由脚本内部解析 ✓）
+- 装到 `~/.codex/pets/` ✓，**覆盖前自动备份** ✓；装完按提示重启 Codex → **设置 → Pets → Refresh** ✓
+- 回滚：把 `~/.codex/pets_backup-<时间戳>/<id>/` 拷回 `~/.codex/pets/` ✓
+- 想先空跑：在命令末尾把 `native` 换成 `--help` 看用法，或先加 `CODEX_HOME=/tmp/cx_test` 试装到临时目录 ✓
+- 已 clone 过仓库的话，等价命令是：`bash dist/install-codex.sh native` ✓
+
+### ① Windows：下载 zip 后手动添加（不需要命令行）
+
+1. **下载**：打开仓库页 → 绿色 **Code** 按钮 → **Download ZIP**
+   （直接链接：`https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.zip`）
+2. **解压** zip，进入 `ai-model-chibi-pets-main\dist\` —— 里面有两个可用目录，**按你要装到哪个应用来选**：
+
+   | 装到哪 | 用哪个目录 | 图集 |
+   |---|---|---|
+   | **ChatGPT 应用**（原 Codex 桌面端已并入） | `dist\codex-native\` | v2，8×11，1536×2288 ✓ |
+   | **ChatGPT 应用 / 网页版的宠物位** | `dist\codex-standard-9row\` | v1，8×9，1536×1872 ✓（该宠物位只认这一种尺寸） |
+
+3. **复制整套文件夹**到宠物目录 —— 在资源管理器地址栏粘贴：
+   ```
+   %USERPROFILE%\.codex\pets
+   ```
+   没有 `pets` 文件夹就自己新建一个。把选的整套（例如 `chatgpt-white-dragon-chibi-v5`）连文件夹一起放进去 ✓
+   最终结构必须是（**两个文件同层，且文件夹名 = `pet.json` 里的 `id`**）：
+   ```
+   %USERPROFILE%\.codex\pets\chatgpt-white-dragon-chibi-v5\pet.json
+   %USERPROFILE%\.codex\pets\chatgpt-white-dragon-chibi-v5\spritesheet.webp
+   ```
+   8 套要全装就把 8 个文件夹都放进去 ✓
+4. **刷新列表**：打开 **ChatGPT 应用** → **设置（Settings）→ Pets → 点 Refresh** ✓
+   自定义宠物列表里就会出现新加的这几套 ✓ 选中即可显示 ✓
+5. 注意三点 ✓：① 文件夹名与 `pet.json` 里的 `id` **必须完全一致** ✓；② 两个文件**必须同层** ✓；
+   ③ 别把 `codex-standard-9row\` 那份装进 Codex ✗、也别把 `codex-native\` 那份喂给只认 v1 的 ChatGPT 宠物位 ✗
+
+> 装错了想重来：直接删掉 `%USERPROFILE%\.codex\pets\<id>` 文件夹即可 ✓（此目录只放宠物素材 ✓）
+
+### ② ChatGPT 应用（脚本方式，含备份与回滚）
 
 ```bash
 # 在本仓库根目录执行
@@ -127,14 +178,14 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
 脚本做三件事：把 8 套的 `pet.json` + `spritesheet.webp` 复制到 `~/.codex/pets/<id>/`；
 **覆盖前先自动备份**已存在的同名宠物到 `~/.codex/pets_backup-<时间戳>/`；逐套打印 `✓ <id>`。
 
-安装完成后：打开 **Codex 桌面版 → 设置（Settings）→ Pets → 点 Refresh**，自定义宠物列表里就会出现这 8 个 ✓。
+安装完成后：打开 **ChatGPT 应用 → 设置（Settings）→ Pets → 点 Refresh**，自定义宠物列表里就会出现这 8 个 ✓。
 
 - 换安装位置：`CODEX_HOME=/自定义/路径 bash dist/install-codex.sh native`
 - 只装某一套：手动复制 `dist/codex-native/<id>/{pet.json,spritesheet.webp}` 到 `~/.codex/pets/<id>/`
 - **卸载 / 回滚**：删掉 `~/.codex/pets/<id>/`；想回到覆盖前的版本，把
   `~/.codex/pets_backup-<时间戳>/<id>/` 拷回 `~/.codex/pets/`
 
-### ② 只认 v1（1536×1872）的客户端
+### ③ 只认 v1（1536×1872）的客户端（含 ChatGPT 应用 / 网页版宠物位）
 
 用 `dist/codex-standard-9row/<id>/` 里那两份文件 ✓（其 `pet.json` **不带** `spriteVersionNumber` ✓ = v1 ✓）。
 **不要**把 11 行 v2 母版喂给它们 ✗，也不要把这份 9 行版装进 Codex ✗（见 §二的两条硬性规定）。

@@ -63,3 +63,18 @@ $PY tools/chroma-verify.py \
 - `qa/previews` 是本次按图集重生成的（旧预览在 `runs/2026-08-chibi-redo-v5/<套>/qa/previews/`，
   含绿残留，已不再使用）。
 - 各套 `README.md` 里的旧数字未改（属历史记录）。
+
+## 2026-09-29 — 契约合规修正（第二轮）
+
+- **图集**：真问题是「完全透明像素带非零 RGB 残留」（官方校验器对原版即报错 ✗，各套 298–6400 px）；
+  已把透明像素 RGB 置 0 ✓（可见像素逐位不变 ✓）。另**纠正一处自我误判** ✗：
+  `idle` 行 `列6` 是官方 `EXTENDED_NEUTRAL_LOOK_FRAME`（v2 必须保留 ✗，v1 才是未用格 → 9row 清空 ✓）——
+  曾被误当作未用格清掉，已回滚 ✓。**官方校验器 24/24 通过 ✓**
+- **validation.json**：改用官方校验器重新生成（旧文件里的 `transparent_rgb_residue_pixels: 0` 与实测矛盾 ✗）
+- **预览**：144 个 GIF/WebP 按契约**逐帧时长**重生成（原来 9 状态是均一 duration ✗）；
+  16 张接触表按原版式重做 ✓
+- **派生**：16 个 zip 重建（结构/权限保持、内容与图集逐字节一致 ✓）；4 份报告用原判据重算 ✓
+- **新增质量门**：`tools/check-contract.py`、`tools/verify-previews.py`、`tools/chroma-verify.py`
+  （Python 3 + Pillow，非 0 退出码）✓
+- **安装脚本**：改为 macOS 优先，兼容 Bash 3.2、零下载/零 sudo/零 Python，含只读预检与自动备份 ✓
+- **文档**：新增 macOS 一行命令与 Windows「zip 手动添加」指南；客户端统一表述为 ChatGPT 应用 ✓

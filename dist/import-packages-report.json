@@ -7,7 +7,7 @@
    "spritesheet.webp"
   ],
   "zip_ok": true,
-  "mb": 2.9
+  "mb": 2.87
  },
  "claude-orange-scholar-chibi-v3": {
   "flat": "claude-orange-scholar-chibi-v3.zip",
@@ -27,7 +27,7 @@
    "spritesheet.webp"
   ],
   "zip_ok": true,
-  "mb": 2.89
+  "mb": 2.86
  },
  "gemini-star-cat-chibi-v1": {
   "flat": "gemini-star-cat-chibi-v1.zip",
@@ -37,7 +37,7 @@
    "spritesheet.webp"
   ],
   "zip_ok": true,
-  "mb": 2.86
+  "mb": 2.84
  },
  "grok-gothic-chibi-v1": {
   "flat": "grok-gothic-chibi-v1.zip",
@@ -47,7 +47,7 @@
    "spritesheet.webp"
   ],
   "zip_ok": true,
-  "mb": 2.95
+  "mb": 2.94
  },
  "kimi-moon-maid-chibi-v2": {
   "flat": "kimi-moon-maid-chibi-v2.zip",
@@ -67,7 +67,7 @@
    "spritesheet.webp"
   ],
   "zip_ok": true,
-  "mb": 3.04
+  "mb": 3.01
  },
  "zhipu-chibi-tech-v2": {
   "flat": "zhipu-chibi-tech-v2.zip",
@@ -77,6 +77,6 @@
    "spritesheet.webp"
   ],
   "zip_ok": true,
-  "mb": 2.63
+  "mb": 2.61
  }
 }

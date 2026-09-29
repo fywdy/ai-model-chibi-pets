@@ -1,16 +1,16 @@
 {
  "chatgpt-white-dragon-chibi-v5": {
-  "native_sha16": "1024ad39f7cf1868",
-  "std9_sha16": "3ffc5aa777d0e139",
-  "std9_mb": 2.3,
+  "native_sha16": "6d7cd4d4a33f2bab",
+  "std9_sha16": "ed0e214ccdbbf7c6",
+  "std9_mb": 2.28,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
   "gif": 9,
   "webp": 9
  },
  "claude-orange-scholar-chibi-v3": {
-  "native_sha16": "a23bff54acf02354",
-  "std9_sha16": "53878701843ccc56",
+  "native_sha16": "6ff6ce931a8bb97b",
+  "std9_sha16": "0b21491990585537",
   "std9_mb": 1.68,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
@@ -18,35 +18,35 @@
   "webp": 9
  },
  "deepseek-whale-maid-chibi-v4": {
-  "native_sha16": "2ddceaec9c6c3c89",
-  "std9_sha16": "f070a93d414fbe40",
-  "std9_mb": 2.36,
+  "native_sha16": "df223ae1fe170007",
+  "std9_sha16": "09832e0af1b6bfd9",
+  "std9_mb": 2.33,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
   "gif": 9,
   "webp": 9
  },
  "gemini-star-cat-chibi-v1": {
-  "native_sha16": "81b3e471822e0bbf",
-  "std9_sha16": "296dd4365db3f44a",
-  "std9_mb": 2.27,
+  "native_sha16": "e9b9d65e22271228",
+  "std9_sha16": "9f72d879c9ca2cfd",
+  "std9_mb": 2.25,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
   "gif": 9,
   "webp": 9
  },
  "grok-gothic-chibi-v1": {
-  "native_sha16": "3e28c2450468aa35",
-  "std9_sha16": "d6b63b458677d224",
-  "std9_mb": 2.41,
+  "native_sha16": "a7d283a24eb03075",
+  "std9_sha16": "86893994b392bc05",
+  "std9_mb": 2.4,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
   "gif": 9,
   "webp": 9
  },
  "kimi-moon-maid-chibi-v2": {
-  "native_sha16": "5c055572232bfc98",
-  "std9_sha16": "7e5b950c38c3d52c",
+  "native_sha16": "5b3d882e7a150986",
+  "std9_sha16": "5745c116b1a5d8a7",
   "std9_mb": 1.73,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
@@ -54,18 +54,18 @@
   "webp": 9
  },
  "qwen-chibi-scholar-v3": {
-  "native_sha16": "a83e11f70ae77bb8",
-  "std9_sha16": "87b71d01156750cb",
-  "std9_mb": 2.4,
+  "native_sha16": "e55bf0eb031b77c0",
+  "std9_sha16": "e5604db7aef9e8a1",
+  "std9_mb": 2.38,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
   "gif": 9,
   "webp": 9
  },
  "zhipu-chibi-tech-v2": {
-  "native_sha16": "ef9b95e5f2a80b21",
-  "std9_sha16": "f350accf40befd7e",
-  "std9_mb": 2.08,
+  "native_sha16": "2296fa87437ed4bd",
+  "std9_sha16": "960ff761f3a644c3",
+  "std9_mb": 2.05,
   "std9_green_px": 0,
   "std9_size": "1536x1872",
   "gif": 9,
