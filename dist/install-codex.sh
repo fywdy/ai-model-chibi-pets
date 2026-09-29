@@ -2,7 +2,7 @@
 # 把宠物包安装到 Codex：${CODEX_HOME:-$HOME/.codex}/pets/<id>/
 #
 # 用法: bash install-codex.sh [native|9row] [bundle目录] [--force] [-h|--help]
-#   native（默认）= v2 母版：11 行 1536×2288，pet.json 含 spriteVersionNumber: 2  ← 装 Codex 用这个
+#   native（默认）= v2 母版：11 行 1536×2288，pet.json 含 spriteVersionNumber: 2  ← 装 ChatGPT 应用用这个
 #   9row          = v1 版式： 9 行 1536×1872，pet.json 省略该字段            ← 只给认 v1 的客户端
 #   --force       = 允许用不同版式覆盖已安装的同名宠物（默认拒绝，防 v1/v2 错配）
 #
@@ -25,7 +25,7 @@ usage() {
   cat <<'USAGE'
 用法: bash install-codex.sh [native|9row] [bundle目录] [--force]
 
-  native   安装 v2 母版（11 行 1536×2288，spriteVersionNumber: 2）—— 装进 Codex 用这个（默认）
+  native   安装 v2 母版（11 行 1536×2288，spriteVersionNumber: 2）—— 装进 ChatGPT 应用用这个（默认）
   9row     安装 v1 版式（8×9 1536×1872，pet.json 不带 spriteVersionNumber）—— 只给认 v1 的客户端
   --force  允许用不同版式覆盖已安装的同名宠物（默认拒绝，防止 v1/v2 错配）
   -h,--help 显示本帮助

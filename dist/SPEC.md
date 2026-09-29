@@ -157,6 +157,11 @@ python3 tools/chroma-verify.py dist        # 绿幕残留门：偏绿像素 ≤2
 `chroma-verify.py` 的判据与历史报告一致：`a>0 且 g>90 且 g-max(r,b)>40` 记为「偏绿像素」。
 历史报告另记录两项：**实心非绿像素被清 = 0**、**非绿像素改色 = 0**。
 
+> **参数说明**（独立审核提示）：8 张 `dist/codex-native/*` 与 8 张顶层母版是 **v2** → 必须带 `--require-v2` ✓；
+> 8 张 `dist/codex-standard-9row/*` 是 **v1** → **不加**该参数 ✓（若误加，校验器会**正确**地报
+> `expected 1536x2288 for a v2 pet, got 1536x1872` ✓）。"24/24 通过"指的就是按此参数分别跑的结果 ✓。
+
+
 ## 6. 版权与署名
 
 8 套角色为**面向各家 AI 品牌的社区同人形象创作**（非官方同人），与 OpenAI / Anthropic / Google / xAI /

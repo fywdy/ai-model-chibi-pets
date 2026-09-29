@@ -35,9 +35,11 @@
 |---|---|
 | `<套>/spritesheet.webp` | **换入修复版**（`lossless=True, exact=True` 保存，逐像素无损） |
 | `<套>/contact-sheet.png` | 按原版式重生成：768×1386，8×11 格，96×126/格，精灵 96×104 居中，底 #E8E8E8 |
-| `<套>/qa/previews/*.gif`（9 个/套） | **新增**，由修复图集重生成；帧序取 `validation.json` 中 `used=true` 的单元格，帧时长沿用旧预览；解码后绿像素 = 0 |
+| `<套>/qa/previews/*.gif`（9 个/套） | **新增**，由修复图集重生成；帧序取 `validation.json` 中 `used=true` 的单元格，帧时长沿用旧预览；解码后绿像素 = 0
+  （⚠️ 2026-09-29 起已改：帧时长按 `animation-rows.md` **逐帧**生成 ✓；且新 `validation.json` 为官方摘要、
+  不再含 `used` 字段 ✓——本行为当时流程记录 ✓） |
 | `<套>/qa/previews/*.webp`（9 个/套） | **新增**，同帧序同时长，无损 + 完整 alpha（GIF 只有 1-bit 透明度，边缘易出硬边，建议优先用 WebP） |
-| `<套>/validation.json` | 追加 `green_residue_pixels` / `max_green_blob_px` / `fringe_green_pixels` / `green_residue_thresholds` / `green_residue_ok` / `greenfix{...}`；其余字段未动 |
+| `<套>/validation.json` | （当时）追加 `green_residue_pixels` / `max_green_blob_px` / `fringe_green_pixels` / `green_residue_thresholds` / `green_residue_ok` / `greenfix{...}`；其余字段未动。<br>⚠️ **2026-09-29 起**该文件已改为官方 `validate_atlas.py` 摘要，**不再含上述 `green_*` 字段** ✓ |
 | `greenfix-report.json` | 新增，逐套修复统计 |
 | `CHANGELOG-greenfix-2026-09-20.md` | 本文件 |
 

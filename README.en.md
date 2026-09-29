@@ -1,4 +1,4 @@
-# AI Model Chibi Pets · Codex Desktop Pet Sprite Packs (Q-style v5)
+# AI Model Chibi Pets · Desktop Pet Sprite Packs (Q-style v5 · for the ChatGPT app)
 
 > ## 🎨 What this is
 > **Community fan-art creations inspired by AI brands.** Eight Q-style anthropomorphic desktop pets —
@@ -125,8 +125,9 @@ its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files 
 
 ## 4. Installation guide
 
-> **About the client**: the **Codex desktop app** has been replaced by the **ChatGPT app** (confirmed on a real
-> machine, 2026-09) ✓. Custom pets still live in `~/.codex/pets/<id>/` ✓, read by the ChatGPT app ✓ — that
+> **About the client**: the **Codex desktop app** has been replaced by the **ChatGPT app** (**single-machine** test,
+> 2026-09 ✓; no self-verifying material in this repository — **not independently verified** ✗).
+> Custom pets still live in `~/.codex/pets/<id>/` ✓, read by the ChatGPT app ✓ — that
 > directory rule comes from the app's bundled `hatch-pet` skill contract
 > (`${CODEX_HOME:-$HOME/.codex}/pets/<pet-name>/` ✓). The install instructions here therefore target the
 > **ChatGPT app** only ✓.
@@ -197,6 +198,8 @@ Then open the **ChatGPT app → Settings → Pets → Refresh**; the eight pets 
 
 - Custom location: `CODEX_HOME=/your/path bash dist/install-codex.sh native`
 - Single pack only: copy `dist/codex-native/<id>/{pet.json,spritesheet.webp}` to `~/.codex/pets/<id>/`
+tools/
+  check-contract.py   verify-previews.py   chroma-verify.py   # repo quality gates (see §5)
 - **Uninstall / roll back**: delete `~/.codex/pets/<id>/`; to restore a backup, copy
   `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`
 
@@ -218,14 +221,14 @@ Importers disagree about the zip's internal layout, so **both variants ship** (c
 
 Try the flat zip first; if the importer can't find `pet.json`, retry with the **foldered** variant ✓.
 
-### ④ Any image-capable client / player
+### ⑤ Any image-capable client / player
 
 Use `dist/generic-assets/<id>/`: a contact sheet plus `previews/` (one GIF and one WebP per state) ✓.
 
 > **Prefer the `.webp` previews**: GIF has only 1-bit transparency and shows hard edges; the WebP
 > versions are lossless with full alpha ✓.
 
-### ⑤ Troubleshooting
+### ⑥ Troubleshooting
 
 - **Pet not listed** → check the folder name equals `pet.json`'s `id` **exactly**, and that
   `spritesheet.webp` sits **next to** `pet.json`, then restart the ChatGPT app / hit Refresh ✓.
@@ -237,13 +240,13 @@ Use `dist/generic-assets/<id>/`: a contact sheet plus `previews/` (one GIF and o
 - **Want to edit** → replace the two files in `dist/codex-native/<id>/` ✓; for v2 **keep
   `spriteVersionNumber: 2`** ✓.
 
-### ⑥ Script behaviour & security notes (verifiable yourself)
+### ⑦ Script behaviour & security notes (verifiable yourself)
 
 `dist/install-codex.sh` is a **purely local script: no network, no sudo, deletes nothing** ✓. It only does
 "read-only preflight → backup → copy":
 
 1. **Read-only preflight** (if any pack fails, it **aborts entirely without touching anything** ✗): per pack it checks
-   that `spritesheet.webp` exists and is WebP (RIFF/WEBP magic ✓), that its size is within 100 KB–20 MiB ✓,
+   that `spritesheet.webp` exists and is WebP (RIFF/WEBP magic ✓), that its size is within 100000 bytes (≈97.7 KiB)–20 MiB ✓,
    that `pet.json`'s `id` matches the folder name ✓, that the pack's declared version matches the chosen
    variant ✓, and that **replacing an installed pet of a different layout is refused by default** ✗
    (prevents accidental v1/v2 mixing; pass `--force` if you really mean it ✓).
@@ -282,7 +285,7 @@ spec verification: [`RELEASE-REPORT-2026-09-27.md`](RELEASE-REPORT-2026-09-27.md
   dialogue.zh-CN.json  validation.json  visual-review.json  contact-sheet.png  README.md
   qa/previews/*.gif|*.webp    # 9 state previews (the README legend uses these)
 dist/
-  codex-native/<id>/          # v2: pet.json + 11-row 1536×2288 (install into Codex)
+  codex-native/<id>/          # v2: pet.json + 11-row 1536×2288 (install into the ChatGPT app)
   codex-standard-9row/<id>/   # v1: pet.json (no spriteVersionNumber) + 9-row 1536×1872
   generic-assets/<id>/        # contact sheet + previews
   import-packages/<id>.zip            # v2, flat layout

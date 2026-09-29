@@ -203,13 +203,13 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
 
 先试根层版；若导入器报「找不到 `pet.json`」，换**文件夹版**（`*-foldered.zip`）再试一次 ✓。
 
-### ④ 任意能读图片的客户端 / 播放器
+### ⑤ 任意能读图片的客户端 / 播放器
 
 用 `dist/generic-assets/<id>/`：接触表 `contact-sheet.png` + `previews/`（9 个状态各一份 GIF + 一份 WebP）✓。
 
 > **优先用 `.webp` 预览**：GIF 只有 1 bit 透明度，边缘容易出硬边；WebP 版无损且带完整 alpha ✓。
 
-### ⑤ 常见问题
+### ⑥ 常见问题
 
 - **列表里看不到宠物** ⇒ 目录名与 `pet.json` 的 `id` 是否**完全一致**、`spritesheet.webp` 是否与 `pet.json` **同层**，
   然后重启 ChatGPT 应用 / 重新 Refresh ✓。
@@ -218,7 +218,7 @@ bash dist/install-codex.sh native     # 11 行 v2 母版（1536×2288）——�
   换支持 alpha 的客户端，或直接看 `previews/*.webp` ✓。
 - **想自己改** ⇒ 替换 `dist/codex-native/<id>/` 那两份文件即可 ✓；**v2 请保留 `spriteVersionNumber: 2`** ✓。
 
-### ⑥ 脚本行为与安全说明（可自行核对）
+### ⑦ 脚本行为与安全说明（可自行核对）
 
 `dist/install-codex.sh` 是**纯本地脚本：不联网、不用 sudo、不删除任何文件** ✓，只做「只读预检 → 备份 → 复制」：
 
