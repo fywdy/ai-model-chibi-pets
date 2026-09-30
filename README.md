@@ -73,7 +73,7 @@ ${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/animation-rows.md       
 
 | 行 | 状态 | 用到的列 | 说明 |
 |---|---|---|---|
-| 0 | `idle` | 0–5 | 待机（也是"减弱动态"时的首帧） |
+| 0 | `idle` | 0–5；扩展中性帧列 6 | 待机（也是"减弱动态"时的首帧） |
 | 1 | `running-right` | 0–7 | 向右移动 |
 | 2 | `running-left` | 0–7 | 向左移动（镜像需保证道具/身份不反） |
 | 3 | `waving` | 0–3 | 挥手 / 引起注意 |
@@ -137,6 +137,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 
 - 只用 **macOS 自带**的 `curl` / `tar` / `bash` ✓ —— **不用装任何东西，也不需要 Python** ✗
   （脚本的校验走系统自带 `plutil` ✓，图集尺寸由脚本内部解析 ✓）
+- 这是**桌面应用**的装法 ✓（网页版**不用**装文件夹 ✗，见 §① 的「网页版」小节 ✓）
 - 装到 `~/.codex/pets/` ✓，**覆盖前自动备份** ✓；装完按提示重启 ChatGPT 应用 → **设置 → Pets → Refresh** ✓
 - 回滚：把 `~/.codex/pets_backup-<时间戳>/<id>/` 拷回 `~/.codex/pets/` ✓
 - 想先空跑：在命令末尾把 `native` 换成 `--help` 看用法，或先加 `CODEX_HOME=/tmp/cx_test` 试装到临时目录 ✓
@@ -152,6 +153,12 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
    |---|---|---|
    | **ChatGPT 桌面应用**（原 Codex 桌面端已并入） | `dist\codex-native\` | v2，8×11，1536×2288 ✓ |
    | **ChatGPT 网页版宠物位** | `dist\codex-standard-9row\` | v1，8×9，1536×1872 ✓（该宠物位只认这一种尺寸） |
+
+   ⚠️ **网页版和桌面版的装法完全不同** ✗（官方说明：桌面端本地宠物**不会**同步到网页 ✗）：
+   - **桌面应用**（macOS/Windows）＝ 上面这个「复制到 `.codex\pets\` + Refresh」流程 ✓，用 `dist\codex-native\`（v2）✓
+   - **网页版**＝ **不需要复制文件夹** ✗：打开 ChatGPT 网页版 → **Settings → Personalization → Pet → Upload pet** ✓
+     上传**单张**透明 PNG/WebP ✓ 必须**正好 1536×1872** ✓ 且 ≤ 20 MiB ✓ ⇒ 用 `dist\codex-standard-9row\<id>\spritesheet.webp` ✓
+     （网页版宠物只在支持的 Work 会话里出现 ✓ 没有桌面端的浮窗/活动托盘/`/pet` ✓；是否可用取决于账号与工作区 ✓）
 
 3. **复制整套文件夹**到宠物目录 —— 在资源管理器地址栏粘贴：
    ```

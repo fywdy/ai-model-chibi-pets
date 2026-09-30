@@ -18,7 +18,7 @@
 | 尺寸 | **1536 × 2288**（8 列 × 11 行） |
 | v1 尺寸 | **1536 × 1872**（8 × 9）—— **发布产物之一**（v1 规范），供只认 v1 的客户端使用 |
 | 格式 | WebP，透明背景，`lossless=True, exact=True` |
-| 体积 | 1.9–3.0 MB／套（本项目自设 ≤ 20 MiB；契约文件未规定上限） |
+| 体积 | 实测 **v2 2.01–3.16 MB（1.91–3.01 MiB）／套**、**v1 1.76–2.51 MB（1.68–2.40 MiB）／套**（发布集 16 套；本项目自设 ≤ 20 MiB，契约文件未规定上限） |
 
 ### 行序（0 起）
 
@@ -106,7 +106,7 @@ must be fully transparent.*）⇒ 本规格的硬性检查项（**以官方校�
 | 目录 | 内容 | 用途 |
 |---|---|---|
 | `codex-native/<套>/` | `pet.json`（**v2**，`spriteVersionNumber: 2`）+ **11 行** 1536×2288 | ChatGPT 应用（原 Codex 桌面端已并入） |
-| `codex-standard-9row/<套>/` | `pet.json`（**v1**，**省略** `spriteVersionNumber`）+ **8×9** 1536×1872 | 只认 v1 的客户端（ChatGPT 网页版等）；**不要装进 ChatGPT 应用** ✗ |
+| `codex-standard-9row/<套>/` | `pet.json`（**v1**，**省略** `spriteVersionNumber`）+ **8×9** 1536×1872 | 只认 v1 的客户端（ChatGPT 网页版等）；**不要装进 ChatGPT 应用** ✗。**网页版不是复制文件夹，而是上传单张图**：Settings → Personalization → Pet → Upload pet（正好 1536×1872、≤20 MiB）|
 | `generic-assets/<套>/` | `pet.json` + `contact-sheet.png` + `previews/*.gif` + `previews/*.webp` | 任何能读图片的客户端 / 播放器 |
 | `import-packages/<套>.zip` | `pet.json` + `spritesheet.webp`（根层） | 第三方桌宠客户端「导入宠物包」 |
 | `import-packages/<套>-foldered.zip` | 同上，但在 `<套>/` 子目录内 | 要求 zip 内带文件夹的导入器 |
@@ -125,7 +125,7 @@ must be fully transparent.*）⇒ 本规格的硬性检查项（**以官方校�
 | 客户端 | 覆盖的 Agent | 做法 |
 |---|---|---|
 | **ChatGPT 应用** | ChatGPT（已并入原 Codex 桌面端） | 原生支持 `~/.codex/pets/<id>/`（已在本机实测确认）；用 `codex-native/`，`bash dist/install-codex.sh` 安装 |
-| **ChatGPT 网页版宠物** | ChatGPT | 支持但**只认 1536×1872（8×9）**；用 `codex-standard-9row/` |
+| **ChatGPT 网页版宠物** | ChatGPT | 支持但**只认 1536×1872（8×9）**；用 `codex-standard-9row/`，且**走上传而非文件夹**：Settings → Personalization → Pet → Upload pet（桌面端本地宠物**不会**同步到网页 ✗）|
 | **Petdex** | Codex / Claude Code / DeepSeek Harness / Hermes / OpenCode / Gemini CLI 等 | 官方宠物包格式就是 **`pet.json` + `spritesheet.{webp,png}`，8×9 或 v2 8×11，单格 192×208** —— 与本套完全一致，可**直接投稿图库**；另有 CLI（`npx petdex install`）与桌面 App（目前仅 macOS） |
 | **clawd-on-desk** | Claude Code / Codex / Cursor / Copilot CLI / Gemini / Antigravity / Qwen / OpenClaw 等 | 支持导入 Codex 宠物包：`设置 → 主题 → 导入宠物 zip`，会自动把图集转成托管主题；用 `import-packages/` 里的 zip |
 | **CoPet** | Claude Code / Codex / Antigravity / OpenCode / Cursor / Copilot CLI / Pi / Gemini | 「内置宠物 + 支持导入 Codex 兼容宠物包」；用 `import-packages/` 里的 zip |

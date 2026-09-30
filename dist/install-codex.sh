@@ -176,6 +176,20 @@ assert_plain() {  # 拒绝符号链接与特殊文件（目标存在时才检查
   return 0
 }
 
+assert_plain_dir() {  # 拒绝父目录是符号链接/非目录（否则 cp 会跟随链接写到目录之外）
+  p="$1"; what="$2"
+  [ -e "${p}" ] || [ -L "${p}" ] || return 0
+  if [ -L "${p}" ]; then
+    echo "  ✗ ${what} 是符号链接（-> $(readlink "${p}")）—— 拒绝写入，避免写到链接指向的位置之外" >&2
+    return 1
+  fi
+  if [ ! -d "${p}" ]; then
+    echo "  ✗ ${what} 存在但不是目录" >&2
+    return 1
+  fi
+  return 0
+}
+
 echo "变体: ${LABEL}"
 echo "来源: ${SRC}"
 echo "目标: ${PETS}"
@@ -184,6 +198,10 @@ echo
 
 # ---------- ② 只读预检 ----------
 preflight_fail=0
+
+# 父目录安全：CODEX_HOME / pets 本身不得是符号链接（否则写入会落到链接指向处）
+assert_plain_dir "${CODEX_HOME}" "CODEX_HOME (${CODEX_HOME})" || preflight_fail=1
+assert_plain_dir "${PETS}" "pets 目录 (${PETS})" || preflight_fail=1
 candidates=0
 ids=""
 conflicts=""
@@ -271,8 +289,16 @@ if [ "${preflight_fail}" != "0" ]; then
   exit 1
 fi
 
-# ---------- ③ 唯一备份目录 ----------
-mkdir -p "${PETS}"
+# ---------- ③ 写入前再次核对父路径（防 TOCTOU 与链接跟随） ----------
+assert_plain_dir "${CODEX_HOME}" "CODEX_HOME (${CODEX_HOME})" || exit 1
+mkdir -p "${PETS}" || { echo "  ✗ 无法创建 ${PETS}" >&2; exit 1; }
+assert_plain_dir "${PETS}" "pets 目录 (${PETS})" || exit 1
+real_home="$(cd "${CODEX_HOME}" 2>/dev/null && pwd -P)"
+real_pets="$(cd "${PETS}" 2>/dev/null && pwd -P)"
+case "${real_pets}/" in
+  "${real_home}"/*) : ;;
+  *) echo "  ✗ pets 的真实路径不在 CODEX_HOME 之内（${real_pets}）—— 拒绝写入" >&2; exit 1 ;;
+esac
 BACKUP_BASE="${CODEX_HOME}/pets_backup-$(date +%Y%m%d-%H%M%S)"
 BACKUP="${BACKUP_BASE}"
 n=1
@@ -293,6 +319,10 @@ for id in ${ids}; do
     if ! cp -R "${PETS}/${id}" "${BACKUP}/${id}"; then
       echo "  ✗ ${id}: 备份失败，跳过（未改动该宠物）" >&2; failed=$((failed + 1)); continue
     fi
+  fi
+  if [ -L "${PETS}/${id}" ]; then
+    echo "  ✗ ${id}: 目标目录是符号链接 —— 跳过（未改动该宠物）" >&2
+    failed=$((failed + 1)); continue
   fi
   if ! mkdir -p "${PETS}/${id}" \
      || ! cp "${pack}/pet.json" "${PETS}/${id}/pet.json" \

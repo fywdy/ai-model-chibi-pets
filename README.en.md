@@ -81,7 +81,7 @@ its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files 
 
 | Row | State | Used columns | Notes |
 |---|---|---|---|
-| 0 | `idle` | 0–5 | calm loop; also the reduced-motion first frame |
+| 0 | `idle` | 0–5; plus extended-neutral column 6 | calm loop; also the reduced-motion first frame |
 | 1 | `running-right` | 0–7 | locomotion to the right |
 | 2 | `running-left` | 0–7 | mirror only if identity/prop handedness stays correct |
 | 3 | `waving` | 0–3 | greeting / attention gesture |
@@ -148,6 +148,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
 - Uses only what macOS **ships with** — `curl` / `tar` / `bash`. **Nothing to install, no Python needed** ✗
   (validation uses the built-in `plutil`; atlas dimensions are parsed by the script itself).
 - Installs into `~/.codex/pets/` with an **automatic backup before overwriting**; then restart the ChatGPT app →
+  This is the **desktop-app** route ✓ (the **web** pet slot does **not** use a folder — see the "web" note in §① below ✓).
   **Settings → Pets → Refresh**.
 - Roll back by copying `~/.codex/pets_backup-<timestamp>/<id>/` back into `~/.codex/pets/`.
 - Dry run first: append `--help` instead of `native`, or prefix `CODEX_HOME=/tmp/cx_test` to install into a
@@ -165,6 +166,13 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --re
    |---|---|---|
    | **ChatGPT desktop app** (the Codex desktop app has been merged into it) | `dist\codex-native\` | v2, 8×11, 1536×2288 ✓ |
    | **ChatGPT web pet slot** | `dist\codex-standard-9row\` | v1, 8×9, 1536×1872 ✓ (that slot only accepts this size) |
+
+   ⚠️ **The web and desktop routes are completely different** ✗ — per OpenAI's own docs,
+   custom pets created in the desktop app are **stored locally and do not sync to ChatGPT web** ✗:
+   - **Desktop app** (macOS/Windows) = the "copy the folder into `.codex\pets\` + Refresh" flow above ✓, using `dist\codex-native\` (v2) ✓
+   - **Web** = **no folder copying** ✗: open ChatGPT on the web → **Settings → Personalization → Pet → Upload pet** ✓
+     and upload **one** transparent PNG/WebP ✓ that is **exactly 1536×1872** ✓ and ≤ 20 MiB ✓ ⇒ use `dist\codex-standard-9row\<id>\spritesheet.webp` ✓
+     (a web pet only appears inside supported Work chats ✓ — no floating overlay, activity tray or `/pet` ✓; availability depends on your account and workspace ✓)
 
 3. **Copy the whole pack folder(s)** into the pets directory — paste this into the Explorer address bar:
    ```
