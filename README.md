@@ -125,23 +125,19 @@ ${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/animation-rows.md       
 
 ### ⓪ macOS：一行命令装好（复制粘贴到「终端」即可）
 
+> ⚠️ **状态说明**：下面这条用的是可变的 `main` 归档 ✗ —— **固定版本 + SHA-256 的 Release 资产已经做好，
+> 但按流程要等独立审核通过后才发布** ✓（草稿在本机 `/tmp/rel/codex-pets-install-v1.0.0.tar.gz`，
+> SHA-256 `5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca` ✓；发布后本段会被替换 ✓）。
+
 ```bash
-V=v1.0.0; SHA=5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca
-d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
- && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz \
-    "https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/releases/download/$V/codex-pets-install-$V.tar.gz" \
- && echo "$SHA  pets.tar.gz" | shasum -a 256 -c - \
- && tar xzf pets.tar.gz && bash "codex-pets-install-$V/dist/install-codex.sh" native
+d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.tar.gz && tar xzf pets.tar.gz && bash ai-model-chibi-pets-main/dist/install-codex.sh native
 ```
 
-> **固定版本 + 摘要校验** ✓：下载的是 Release 资产 `v1.0.0`（不是会变的 `main` 归档 ✗），
-> 且**先校验 SHA-256、通过了才会执行** ✓ —— 校验和不符会在此停下，不会运行任何脚本 ✓。
-> 该校验和同时写在仓库 `dist/SHA256SUMS` ✓（与 tag `v1.0.0` 一一对应 ✓，可自行比对 ✓）。
-> 链接用了 `gh-proxy.com` 镜像 ✓（国内直连 GitHub 常只有几十 KB/s ✗，本机实测镜像可达 ~2 MB/s ✓）；
-> 网络不好时**再执行同一行即可续传** ✓（`-C -` 接着上次的字节继续 ✓）；想走官方源删掉 `https://gh-proxy.com/` 前缀 ✓；
-> 若本机代理反而更慢，给 `curl` 加 `--noproxy '*'` **绕开系统代理**再走镜像 ✓
+> 链接用了 `gh-proxy.com` 镜像 ✓（国内直连 GitHub 常只有几十 KB/s ✗，本机实测镜像可达 ~2 MB/s ✓）。
+> 网络不好时**再执行同一行即可续传** ✓（`-C -` 会接着上次的字节继续 ✓ 不会重下 ✓）。
+> 若本机开着代理（SSR / Shadowrocket / Clash 等）反而更慢，加 `--noproxy '*'` **绕开系统代理**再走镜像 ✓
 > （本机实测：绕开 104 KB/s ↔ 走代理 87 KB/s，视线路而定 ✓ 两种都可直接粘贴 ✓）。
-
+> 想走官方源就删掉 `https://gh-proxy.com/` 前缀 ✓。
 - 只用 **macOS 自带**的 `curl` / `tar` / `bash` ✓ —— **不用装任何东西，也不需要 Python** ✗
   （脚本的校验走系统自带 `plutil` ✓，图集尺寸由脚本内部解析 ✓）
 - 这是**桌面应用**的装法 ✓（网页版**不用**装文件夹 ✗，见 §① 的「网页版」小节 ✓）
