@@ -135,19 +135,24 @@ its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files 
 ### ⓪ macOS: one-line install (paste into Terminal)
 
 > ⚠️ **Status**: the line below still uses the mutable `main` archive ✗. A **pinned + SHA-256 Release
-> asset is built but intentionally left unpublished until the independent review passes** ✓ (draft:
-> `/tmp/rel/codex-pets-install-v1.0.0.tar.gz`, SHA-256 `5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca` ✓). This section will be replaced once it is published.
-
 ```bash
-d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.tar.gz && tar xzf pets.tar.gz && bash ai-model-chibi-pets-main/dist/install-codex.sh native
+V=v1.0.0; SHA=5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca
+d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
+ && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz \
+    "https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/releases/download/$V/codex-pets-install-$V.tar.gz" \
+ && echo "$SHA  pets.tar.gz" | shasum -a 256 -c - \
+ && tar xzf pets.tar.gz && bash "codex-pets-install-$V/dist/install-codex.sh" native
 ```
 
-> The link goes through the `gh-proxy.com` mirror ✓ (direct GitHub from mainland China is often only tens of
-> KB/s ✗; the mirror measured up to ~2 MB/s ✓). On a flaky connection, **just run the same line again** ✓ —
-> `-C -` resumes from where it stopped instead of re-downloading ✓. Drop the `https://gh-proxy.com/` prefix
-> If a local proxy (SSR / Shadowrocket / Clash …) makes the mirror slower, add `--noproxy '*'` to
-> **bypass the system proxy** ✓ (measured here: 104 KB/s bypassed vs 87 KB/s through the proxy — try both).
-> to use the official source.
+> **Pinned release + checksum** ✓: this downloads the fixed Release asset `v1.0.0` (not the mutable `main`
+> archive ✗) and **verifies its SHA-256 before executing anything** ✓ — if the digest does not match, the line
+> stops there and no script runs ✓. The same digest is committed at `dist/SHA256SUMS` ✓ (1:1 with tag `v1.0.0`,
+> so you can compare it yourself ✓).
+> The URL uses the `gh-proxy.com` mirror ✓ (direct GitHub from mainland China is often tens of KB/s ✗;
+> the mirror measured up to ~2 MB/s ✓); on a flaky connection **run the same line again** ✓ (`-C -` resumes ✓);
+> drop the `https://gh-proxy.com/` prefix for the official source ✓; if a local proxy makes it slower, add
+> `--noproxy '*'` to **bypass the system proxy** ✓ (measured here: 104 KB/s bypassed vs 87 KB/s through it ✓).
+
 - Uses only what macOS **ships with** — `curl` / `tar` / `bash`. **Nothing to install, no Python needed** ✗
   (validation uses the built-in `plutil`; atlas dimensions are parsed by the script itself).
 - Installs into `~/.codex/pets/` with an **automatic backup before overwriting**; then restart the ChatGPT app →
@@ -217,7 +222,9 @@ Then open the **ChatGPT app → Settings → Pets → Refresh**; the eight pets 
 ### ③ Clients that only understand v1 (1536×1872) — incl. the ChatGPT web pet slot
 
 Use the two files inside `dist/codex-standard-9row/<id>/` ✓ (its `pet.json` **omits** `spriteVersionNumber`,
-i.e. v1 ✓). Do **not** feed the 11-row v2 master to those clients ✗, and do not install the 9-row variant
+i.e. v1 ✓). **Desktop / third-party clients** use both files in that folder (`pet.json` + `spritesheet.webp`) ✓,
+whereas the **ChatGPT web slot only takes the single `spritesheet.webp`** ✗ (no `pet.json` ✓ — via
+Settings → Personalization → Pet → Upload pet ✓). Do **not** feed the 11-row v2 master to those clients ✗, and do not install the 9-row variant
 into the ChatGPT desktop app ✗ (see the two hard rules in §2).
 
 ### ④ Third-party desktop pet clients
