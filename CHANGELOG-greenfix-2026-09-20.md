@@ -83,3 +83,8 @@ $PY tools/chroma-verify.py "<当时的工作区A>" "<当时的工作区B>"
   （Python 3 + Pillow，非 0 退出码）✓
 - **安装脚本**：改为 macOS 优先，兼容 Bash 3.2、零下载/零 sudo/零 Python，含只读预检与自动备份 ✓
 - **文档**：新增 macOS 一行命令与 Windows「zip 手动添加」指南；客户端统一表述为 ChatGPT 应用 ✓
+
+## 2026-09-30 — 仓库改名
+
+- 仓库 `ai-model-chibi-pets` → **`chatgpt-chibi-pets`** ✓（GitHub 会保留旧 URL 的 301 重定向 ✓）；
+  仓库描述改为英文优先并补充 topics ✓；README 顶部新增「英文快速安装」块 ✓。

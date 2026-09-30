@@ -1,5 +1,11 @@
 # AI 模型娘 · 桌面宠物包（Q 版 v5 · 适配 ChatGPT 应用）
 
+> ### ⚡ 快速安装（English quick start）
+> **macOS · 桌面应用（一行命令 ✓ 带 SHA-256 校验）** —— 见 §四 ⓪ ✓：校验发布包摘要后会装好 8 套到 `~/.codex/pets/` ✓ 覆盖前自动备份 ✓。
+> **Windows · 桌面应用** —— 下载 ZIP ✓ 把 `dist\codex-native\<id>\` 整个文件夹复制到 `%USERPROFILE%\.codex\pets\<id>\` ✓ 然后 **设置 → Pets → Refresh** ✓。
+> **ChatGPT 网页版宠物位** —— **不是复制文件夹** ✗：**Settings → Personalization → Pet → Upload pet** ✓ 上传单张透明 **1536 × 1872** 的 WebP ✓（`dist/codex-standard-9row/<id>/spritesheet.webp` ✓ ≤ 20 MiB ✓）。
+> 每套都提供**两种版式** ✓：**v2 · 11 行 · 1536×2288**（桌面应用 ✓）与 **v1 · 9 行 · 1536×1872**（网页版 / 只认 v1 的客户端 ✓）。
+
 > ## 🎨 这是什么
 > **面向各家 AI 品牌的「社区同人形象创作」** —— 由社区作者以各品牌的公开形象、配色与调性为灵感，
 > 独立设计的 8 套 Q 版拟人桌宠（每套对应一家），并打包成 Codex 可用的宠物格式。
@@ -129,7 +135,7 @@ ${CODEX_HOME:-$HOME/.codex}/skills/hatch-pet/references/animation-rows.md       
 V=v1.0.0; SHA=5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca
 d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
  && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz \
-    "https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/releases/download/$V/codex-pets-install-$V.tar.gz" \
+    "https://gh-proxy.com/https://github.com/fywdy/chatgpt-chibi-pets/releases/download/$V/codex-pets-install-$V.tar.gz" \
  && echo "$SHA  pets.tar.gz" | shasum -a 256 -c - \
  && tar xzf pets.tar.gz && bash "codex-pets-install-$V/dist/install-codex.sh" native
 ```
@@ -153,8 +159,8 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
 ### ① Windows：下载 zip 后手动添加（不需要命令行）
 
 1. **下载**：打开仓库页 → 绿色 **Code** 按钮 → **Download ZIP**
-   （直接链接：`https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.zip`）
-2. **解压** zip，进入 `ai-model-chibi-pets-main\dist\` —— 里面有两个可用目录，**按你要装到哪个应用来选**：
+   （直接链接：`https://github.com/fywdy/chatgpt-chibi-pets/archive/refs/heads/main.zip`）
+2. **解压** zip，进入 `chatgpt-chibi-pets-main\dist\` —— 里面有两个可用目录，**按你要装到哪个应用来选**：
 
    | 装到哪 | 用哪个目录 | 图集 |
    |---|---|---|

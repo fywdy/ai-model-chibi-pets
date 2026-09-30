@@ -1,5 +1,11 @@
 # AI Model Chibi Pets · Desktop Pet Sprite Packs (Q-style v5 · for the ChatGPT app)
 
+> ### ⚡ Quick install (English)
+> **macOS · desktop app (one line, SHA-256 verified)** — paste the command in [§4 ⓪](#-macos-one-line-install-paste-into-terminal): it verifies the release checksum, then installs all 8 pets into `~/.codex/pets/`, backing up anything it overwrites.
+> **Windows · desktop app** — download the ZIP, copy each `dist\codex-native\<id>\` folder to `%USERPROFILE%\.codex\pets\<id>\`, then **Settings → Pets → Refresh**.
+> **ChatGPT web pet slot** — *not* a folder: **Settings → Personalization → Pet → Upload pet**, uploading a single transparent **1536 × 1872** WebP (`dist/codex-standard-9row/<id>/spritesheet.webp`, ≤ 20 MiB).
+> Every character ships **two layouts**: **v2 · 11 rows · 1536×2288** (desktop app) and **v1 · 9 rows · 1536×1872** (web / v1-only clients).
+
 > ## 🎨 What this is
 > **Community fan-art creations inspired by AI brands.** Eight Q-style anthropomorphic desktop pets —
 > one per brand — independently designed by a community author from each brand's public imagery,
@@ -139,7 +145,7 @@ its `pet.json` **omits** `spriteVersionNumber` ✓. Do not feed those two files 
 V=v1.0.0; SHA=5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca
 d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
  && curl -fL -C - --retry 3 --retry-all-errors -o pets.tar.gz \
-    "https://gh-proxy.com/https://github.com/fywdy/ai-model-chibi-pets/releases/download/$V/codex-pets-install-$V.tar.gz" \
+    "https://gh-proxy.com/https://github.com/fywdy/chatgpt-chibi-pets/releases/download/$V/codex-pets-install-$V.tar.gz" \
  && echo "$SHA  pets.tar.gz" | shasum -a 256 -c - \
  && tar xzf pets.tar.gz && bash "codex-pets-install-$V/dist/install-codex.sh" native
 ```
@@ -166,8 +172,8 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
 ### ① Windows: download the ZIP and add the folder manually (no command line)
 
 1. **Download**: on the repository page click the green **Code** button → **Download ZIP**
-   (direct link: `https://github.com/fywdy/ai-model-chibi-pets/archive/refs/heads/main.zip`).
-2. **Unzip** and open `ai-model-chibi-pets-main\dist\`. There are two usable directories — **pick according
+   (direct link: `https://github.com/fywdy/chatgpt-chibi-pets/archive/refs/heads/main.zip`).
+2. **Unzip** and open `chatgpt-chibi-pets-main\dist\`. There are two usable directories — **pick according
    to which app you are installing into**:
 
    | Target | Which directory | Atlas |
