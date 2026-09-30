@@ -1,0 +1,4 @@
+# 发布包校验和（固定版本，勿用可变的 main 归档）
+# 资产: codex-pets-install-v1.0.0.tar.gz  ← GitHub Releases v1.0.0
+# 校验: shasum -a 256 -c dist/SHA256SUMS   （或 sha256sum -c）
+5868c80d48e505f0bb50b5b222d0523c7a169d2cdbb167be1590333a1aa5a9ca  codex-pets-install-v1.0.0.tar.gz
