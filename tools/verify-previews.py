@@ -43,6 +43,20 @@ def durations(path):
     return im.size, d
 
 
+def webp_durations(path):
+    """WebP 的逐帧时长：Pillow 的 info['duration'] 只给首帧，故直接解析 ANMF 块。"""
+    data = open(path, 'rb').read()
+    out, i = [], 0
+    while True:
+        j = data.find(b'ANMF', i)
+        if j < 0:
+            break
+        # ANMF 载荷：x(3) y(3) w-1(3) h-1(3) duration(3) flags(1)
+        out.append(int.from_bytes(data[j + 20:j + 23], 'little'))
+        i = j + 4
+    return out
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else '.'
     dirs = preview_dirs(root)
@@ -64,6 +78,11 @@ def main():
                     n = getattr(Image.open(p), 'n_frames', 1)
                     if n != len(exp):
                         probs.append(f"{state}.webp 帧数 {n} ≠ {len(exp)}")
+                    if size != (192, 208):
+                        probs.append(f"{state}.webp 尺寸 {size} ≠ (192, 208)")
+                    wd = webp_durations(p)
+                    if len(wd) != len(exp) or wd != exp:
+                        probs.append(f"{state}.webp 时长 {wd} ≠ {exp}")
                     continue
                 if size != (192, 208):
                     probs.append(f"{state}.gif 尺寸 {size} ≠ (192, 208)")

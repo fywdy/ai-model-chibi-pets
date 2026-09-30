@@ -75,8 +75,7 @@ def fringe_px(im, mask):
     return total
 
 
-def main():
-    root = sys.argv[1] if len(sys.argv) > 1 else '.'
+def check(root):
     sheets = []
     for dirpath, dirnames, files in os.walk(os.path.join(root, 'codex-native')):
         if 'spritesheet.webp' in files:
@@ -106,6 +105,13 @@ def main():
     print(f"\n阈值：偏绿 ≤{MAX_GREEN_PX}、最大绿块 ≤{MAX_BLOB_PX}、边缘绿 ≤{MAX_FRINGE_PX}；"
           f"检查 {len(sheets)} 张，超阈值 {failed} 张")
     return 0 if failed == 0 else 1
+
+
+def main():
+    rc = 0
+    for root in (sys.argv[1:] or ['.']):    # 支持传入多个目录，逐个检查
+        rc |= check(root)
+    return rc
 
 
 if __name__ == '__main__':

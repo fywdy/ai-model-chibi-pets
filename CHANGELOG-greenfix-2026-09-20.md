@@ -49,10 +49,11 @@
 ## 验收方式
 
 ```bash
-PY=/opt/homebrew/opt/python@3.11/libexec/bin/python
-$PY tools/chroma-verify.py \
-   "pet-packs/import-bundle-2026-08-v5-chibi" \
-   "pet-packs/bundle-2026-09-20-v5-chibi-greenfix"
+# ⚠️ 历史记录：下面两条路径来自当时本机的中间工作区，发布仓库中并不存在，
+#    因此该命令**无法在本仓库原样复现** ✗；等价的可复现命令是本仓库自带的：
+#      python3 tools/chroma-verify.py dist/codex-native dist/codex-standard-9row
+PY=/opt/homebrew/opt/python@3.11/libexec/bin/python   # 当时的解释器路径（非通用）
+$PY tools/chroma-verify.py "<当时的工作区A>" "<当时的工作区B>"
 ```
 
 阈值：偏绿 ≤200 px、最大绿块 ≤20 px、边缘绿 ≤60 px、实心非绿被清 = 0、非绿改色 = 0。
@@ -75,7 +76,7 @@ $PY tools/chroma-verify.py \
 - **validation.json**：改用官方校验器重新生成（旧文件里的 `transparent_rgb_residue_pixels: 0` 与实测矛盾 ✗）。
   注：以上 `green_*` / `fringe_*` 字段名属于**旧版** `validation.json`；2026-09-29 起该文件为官方
   `validate_atlas.py` 摘要（`ok` / 尺寸 / 行列 / `transparent_rgb_residue_pixels`），不再含 `green_*` ✓
-- **预览**：144 个 GIF/WebP 按契约**逐帧时长**重生成（原来 9 状态是均一 duration ✗）；
+- **预览**：**顶层 144 个 + `dist/` 发布副本 144 个 = 288 个** GIF/WebP 按契约**逐帧时长**重生成（原来 9 状态是均一 duration ✗）；
   16 张接触表按原版式重做 ✓
 - **派生**：16 个 zip 重建（结构/权限保持、内容与图集逐字节一致 ✓）；4 份报告用原判据重算 ✓
 - **新增质量门**：`tools/check-contract.py`、`tools/verify-previews.py`、`tools/chroma-verify.py`
