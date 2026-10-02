@@ -2,8 +2,8 @@
 
 ## 1. 性质
 
-本仓库收录的 8 套角色均为**非官方同人创作（unofficial fan art）**，是为个人桌面使用而绘制的
-Q 版拟人形象。它们**不是**任何公司或产品的官方形象，也**不代表**其立场、审美或设计语言。
+本仓库收录的 8 套角色均为**非官方同人创作（unofficial fan art）**：基于社区同人形象再创作，
+是为个人桌面使用而绘制的 Q 版拟人形象。它们**不是**任何公司或产品的官方形象，也**不代表**其立场、审美或设计语言。
 
 ## 2. 无关联声明
 
@@ -25,9 +25,9 @@ Moonshot AI（Kimi）· 阿里巴巴（Qwen）· 智谱 AI（Zhipu / GLM）
 
 角色图集由生成式图像工具产出后**逐格人工筛选、拼接与修复**（含绿幕残留清理，硬门与逐套数字见
 `chroma-verify.json`、`greenfix-report.json` 与 `CHANGELOG-greenfix-2026-09-20.md`）。
-仓库内的校验记录中，`visual-review.json` 为当时流程的原始留档 ✓；
-`validation.json` 已于 **2026-09-29** 由官方 `validate_atlas.py --require-v2` 重新生成 ✓
-（旧版本含 `green_*` 等字段，现为官方摘要 ✓；`file` 字段为仓库内相对路径 ✓）。
+仓库内的校验记录中，`visual-review.json` 为当时流程的原始留档；
+`validation.json` 已于 **2026-09-29** 由官方 `validate_atlas.py --require-v2` 重新生成
+（旧版本含 `green_*` 等字段，现为官方摘要；`file` 字段为仓库内相对路径）。
 
 ## 5. 下架与联系
 
