@@ -67,11 +67,11 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
 
 It verifies the download's SHA-256 first (if the digest doesn't match it stops and does not run the installer),
 then unpacks and installs all 8 packs into `~/.codex/pets/`, backing up anything it overwrites.
-Afterwards restart the app, then go to **Settings → Pets → Refresh**.
+Afterwards restart the app, then go to **Settings → Pets → Refresh** and pick your pet. Then type `/pet`, or choose **Show pet** from the command menu, and it appears on screen.
 
 > Pinned release tag + `gh-proxy` mirror; the same digest is committed at `dist/SHA256SUMS`, compare it yourself.
 > Slow network? Run the same block again — `-C -` resumes. Add `--noproxy '*'` if a local proxy makes the mirror slower.
-> Install elsewhere: `export CODEX_HOME="/your/path"` first, then run the command. The default is `~/.codex/pets/`.
+> Install elsewhere: `export CODEX_HOME="/your/path"` first, then run the command. The default is `~/.codex/pets/`, with a sibling `pets_backup-<timestamp>/` backup — setting `CODEX_HOME` moves both.
 > Roll back by copying `~/.codex/pets_backup-<timestamp>/<id>/` back.
 
 ### Windows desktop app
@@ -93,7 +93,7 @@ Afterwards restart the app, then go to **Settings → Pets → Refresh**.
 On the web you don't copy folders — you upload one image.
 
 1. Download the repo first: repo page → **Code** → **Download ZIP**, then unzip — you need the file below.
-2. Open ChatGPT on the web → **Settings → Personalization → Pet**. (If you don't see a Pet entry, the feature isn't available on your account yet.)
+2. Open ChatGPT on the web → **Settings → Personalization → Pet**. (Whether the Pet entry appears depends on your account and workspace; web pets show up in supported ChatGPT Work conversations.)
 3. Click **Upload pet** and choose this file (transparent background · exactly 1536 × 1872 · ≤ 20 MiB):
    ```
    dist/codex-standard-9row/<id>/spritesheet.webp
@@ -132,7 +132,7 @@ On the web you don't copy folders — you upload one image.
 ## 3. Troubleshooting
 
 - **The pet doesn't show up** ⇒ ① does the folder name match the `id` in `pet.json`? ② are both files side by side? ③ restart the app, then Refresh.
-- **Garbled / misaligned frames** ⇒ wrong layout. Desktop uses 11 rows (1536 × 2288), web uses 9 rows (1536 × 1872).
+- **Garbled / misaligned frames** ⇒ check the atlas layout against your `pet.json` first. If the layout is the problem: this repo's desktop steps use 11 rows (1536 × 2288), the web upload uses 9 rows (1536 × 1872).
 - **Animation is offset** ⇒ check the atlas layout against your `pet.json` config.
 - **Hard or green edges** ⇒ GIF previews can show hard edges; try `previews/*.webp`. If the WebP or the app still shows green edges, tell us which character.
 - **Want to edit one** ⇒ just replace the two files inside `<id>/`; keep `"spriteVersionNumber": 2` for v2.
@@ -144,7 +144,7 @@ On the web you don't copy folders — you upload one image.
 | If you want | Look at |
 |---|---|
 | Full atlas spec (row order, frame counts per animation, `pet.json` fields) | [`dist/SPEC.md`](dist/SPEC.md) |
-| What the installer does, and how to check it | [`dist/install-codex.sh`](dist/install-codex.sh) (pure shell, no network, no sudo, writes only inside `~/.codex/pets/`) |
+| What the installer does, and how to check it | [`dist/install-codex.sh`](dist/install-codex.sh) (pure shell, no network, no sudo; installs into `~/.codex/pets/` and creates a sibling `pets_backup-<timestamp>/` backup — setting `CODEX_HOME` moves both) |
 | Quality gates (contract / preview timing / chroma residue) | [`tools/`](tools/) |
 | Validator output & repair history | `*/validation.json`, [`RELEASE-REPORT-2026-09-27.md`](RELEASE-REPORT-2026-09-27.md), [`CHANGELOG-greenfix-2026-09-20.md`](CHANGELOG-greenfix-2026-09-20.md) |
 | Licence & fan-work rules | [`LICENSE`](LICENSE), [`NOTICE.md`](NOTICE.md) |

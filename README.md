@@ -65,11 +65,11 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
  && tar xzf pets.tar.gz && bash "codex-pets-install-$V/dist/install-codex.sh" native
 ```
 
-它会先校验下载包的 SHA-256（不符就停下，不执行任何脚本），再解包，把 8 套装进 `~/.codex/pets/`，覆盖前自动备份。装完按提示重启应用，然后 **设置 → Pets → Refresh**。
+它会先校验下载包的 SHA-256（不符就停下，不执行任何脚本），再解包，把 8 套装进 `~/.codex/pets/`，覆盖前自动备份。装完按提示重启应用，然后 **设置 → Pets → Refresh** 选中宠物；再输入 `/pet`，或在命令菜单里选择 **Show pet**，桌宠就会显示出来。
 
 > 用的是固定版本 tag + `gh-proxy` 镜像；校验和也写在仓库 `dist/SHA256SUMS`，可自行比对。
 > 网络慢时**再执行同一段命令**即可续传（`-C -`）；镜像慢可以给 curl 加 `--noproxy '*'` 绕开系统代理。
-> 装到别处：先执行 `export CODEX_HOME="/你的路径"`，再运行安装命令。默认安装到 `~/.codex/pets/`。
+> 装到别处：先执行 `export CODEX_HOME="/你的路径"`，再运行安装命令。默认安装到 `~/.codex/pets/`，备份目录默认是同级 `pets_backup-<时间戳>/`；设了 `CODEX_HOME` 后，安装与备份路径都跟着它变。
 > 想回滚：把 `~/.codex/pets_backup-<时间戳>/<id>/` 拷回去。
 
 ### Windows 桌面应用
@@ -91,7 +91,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
 网页版**不是复制文件夹**，而是上传一张图。
 
 1. 先从仓库页 → **Code** → **Download ZIP** 下载并解压，才有下面那个文件。
-2. 打开 ChatGPT 网页版 → **Settings → Personalization → Pet**（如果你的账户里没有 Pet 入口，说明该功能还没对你开放）。
+2. 打开 ChatGPT 网页版 → **Settings → Personalization → Pet**（Pet 入口是否出现，取决于你的账户与工作区是否已开放该功能；网页宠物显示在支持的 ChatGPT Work 对话里）。
 3. 点 **Upload pet**，选这张图（透明背景 · 正好 1536 × 1872 · ≤ 20 MiB）：
    ```
    dist/codex-standard-9row/<id>/spritesheet.webp
@@ -130,7 +130,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
 ## 三、常见问题
 
 - **列表里看不到宠物** ⇒ ① 文件夹名与 `pet.json` 的 `id` 一致？② 两个文件在同一层？③ 重启应用后再刷新。
-- **显示成马赛克 / 错位** ⇒ 版式用错了。桌面端用 11 行（1536 × 2288），网页版用 9 行（1536 × 1872）。
+- **显示成马赛克 / 错位** ⇒ 先核对图集版式与 `pet.json` 配置；如果是版式装错：本仓库的桌面安装步骤用 11 行（1536 × 2288），网页版用 9 行（1536 × 1872）。
 - **动画错位** ⇒ 先核对图集版式与 `pet.json` 的配置。
 - **边上有硬边 / 绿边** ⇒ GIF 预览可能出现硬边，建议改看 `previews/*.webp`；如果 WebP 或应用里仍然有绿边，请反馈具体角色。
 - **想自己改** ⇒ 直接替换 `<id>/` 里那两份文件；改 v2 时记得保留 `"spriteVersionNumber": 2`。
@@ -142,7 +142,7 @@ d="${TMPDIR:-/tmp}/pets-install"; mkdir -p "$d" && cd "$d" \
 | 想了解 | 看这里 |
 |---|---|
 | 完整图集规格（行序、每格用几列、`pet.json` 字段） | [`dist/SPEC.md`](dist/SPEC.md) |
-| 安装脚本做了什么、怎么核对 | [`dist/install-codex.sh`](dist/install-codex.sh)（纯 shell，不联网、不用 sudo，默认只写 `~/.codex/pets/`） |
+| 安装脚本做了什么、怎么核对 | [`dist/install-codex.sh`](dist/install-codex.sh)（纯 shell，不联网、不用 sudo；默认装到 `~/.codex/pets/`，并在同级建 `pets_backup-<时间戳>/` 备份目录；设了 `CODEX_HOME` 则两者都跟着变） |
 | 质量门（契约 / 预览时长 / 绿边残留） | [`tools/`](tools/) |
 | 校验器输出与修正记录 | `*/validation.json`、[`RELEASE-REPORT-2026-09-27.md`](RELEASE-REPORT-2026-09-27.md)、[`CHANGELOG-greenfix-2026-09-20.md`](CHANGELOG-greenfix-2026-09-20.md) |
 | 许可与二次创作 | [`LICENSE`](LICENSE)、[`NOTICE.md`](NOTICE.md) |
